@@ -12,10 +12,6 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: pages-deploy
-  cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -30,14 +26,6 @@ jobs:
         with:
           node-version: 22
           cache: npm
-
-      - name: Cache Astro assets
-        uses: actions/cache@v4
-        with:
-          path: node_modules/.astro
-          key: astro-assets-${{ hashFiles('src/**', 'public/**', 'astro.config.mjs') }}
-          restore-keys: |
-            astro-assets-
 
       - name: Instalar dependências
         run: npm ci --no-audit --no-fund
@@ -55,6 +43,9 @@ jobs:
 
   deploy:
     if: github.event_name != 'pull_request'
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
