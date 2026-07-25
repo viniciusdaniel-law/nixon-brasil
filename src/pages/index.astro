@@ -7,7 +7,6 @@ const articles = (await getCollection('artigos', ({ data }) => !data.draft))
   .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
 const lead = articles[0];
 const rest = articles.slice(1, 5);
-const docs = await getCollection('documentos');
 
 function coverOf(article: (typeof articles)[number]) {
   const raw = article.data.cover ?? '';
@@ -17,7 +16,7 @@ function coverOf(article: (typeof articles)[number]) {
 ---
 <BaseLayout
   title="Nixon Brasil"
-  description="Defesa documentada do legado de Richard Nixon em português: China, Presidência, Brasil e arquivo."
+  description="Publicação histórica e acervo digital sobre Richard Nixon em português: biografia, presidência, política externa e o dossiê Brasil."
 >
   <section class="hero hero-v2">
     <img
@@ -31,37 +30,23 @@ function coverOf(article: (typeof articles)[number]) {
     />
     <div class="shell hero-content">
       <div class="hero-copy">
-        <p class="hero-badge">Arquivo · ensaio · apologia</p>
-        <p class="kicker light">1913 — 1994 · 37º Presidente dos EUA</p>
-        <h1>Nixon em português.<br /><em>Sem desculpas.</em></h1>
+        <p class="kicker light">1913 — 1994 · 37º Presidente dos Estados Unidos</p>
+        <h1>Arquivo e ensaio sobre Richard Nixon, em português.</h1>
         <p class="hero-lead">
-          Portal editorial que defende o legado com documento na mesa:
-          abertura da China, Estado ambiental, détente e o Brasil como potência regional.
+          Publicação independente que examina o legado com documento na mesa:
+          a abertura da China, o Estado ambiental, a détente e o lugar do Brasil no hemisfério.
         </p>
         <div class="actions">
           <a class="btn primary" href={`${base}artigos/`}>Ler os artigos</a>
-          <a class="btn gold" href={`${base}acervo/`}>Abrir o acervo</a>
-          <a class="btn ghost" href={`${base}politica-externa/`}>China · 1972</a>
+          <a class="btn ghost" href={`${base}acervo/`}>Abrir o acervo</a>
         </div>
       </div>
     </div>
-    <p class="photo-credit">Ollie Atkins / NARA · domínio público</p>
-  </section>
-
-  <section class="ticker" aria-label="Linha editorial">
-    <div class="shell ticker-inner">
-      <strong>Posição</strong>
-      <span>Favorável ao legado · fontes da Casa Branca, FRUS e NARA · independente</span>
-      <a href={`${base}sobre/`}>Sobre o projeto →</a>
-    </div>
-  </section>
-
-  <section class="impact-strip impact-v2" aria-label="Números">
-    <div class="shell impact-grid">
-      <div><strong>49</strong><span>Estados em 1972</span></div>
-      <div><strong>1972</strong><span>Abertura à China</span></div>
-      <div><strong>{articles.length}</strong><span>Artigos no ar</span></div>
-      <div><strong>{docs.length}</strong><span>Peças no acervo</span></div>
+    <div class="hero-note">
+      <div class="shell">
+        <span>Fontes: Casa Branca · FRUS · NARA</span>
+        <span>Ollie Atkins / NARA · domínio público</span>
+      </div>
     </div>
   </section>
 
@@ -70,7 +55,7 @@ function coverOf(article: (typeof articles)[number]) {
       <div class="shell">
         <div class="section-head tight">
           <div>
-            <p class="kicker">Capa da semana</p>
+            <p class="kicker">Em destaque</p>
             <h2>O que ler agora.</h2>
           </div>
           <a class="btn dark" href={`${base}artigos/`}>Todos os artigos</a>
@@ -111,46 +96,47 @@ function coverOf(article: (typeof articles)[number]) {
     </section>
   )}
 
-  <section class="section quote-band">
-    <div class="shell quote-inner">
-      <p class="kicker light">Linha editorial</p>
-      <blockquote>
-        A charge de Watergate não apaga a China, a EPA, o SALT nem o mapa hemisférico.
-        Este site existe para devolver escala ao arquivo — em português.
-      </blockquote>
-      <a class="btn primary" href={`${base}artigos/abertura-china/`}>Começar pela China →</a>
-    </div>
-  </section>
-
   <section class="section">
     <div class="shell">
       <div class="section-head">
         <div>
           <p class="kicker">Mapa do site</p>
-          <h2>Quatro entradas.</h2>
+          <h2>Seções.</h2>
         </div>
         <p>Escolha o eixo. Cada página liga narrativa a documento.</p>
       </div>
-      <div class="entry-grid">
-        <a class="entry" href={`${base}politica-externa/`}>
-          <span>01</span>
-          <h3>Política externa</h3>
-          <p>China, détente, triângulo estratégico.</p>
+      <div class="index-list">
+        <a class="index-row" href={`${base}politica-externa/`}>
+          <span class="card-meta">Eixo 1</span>
+          <div>
+            <h3>Política externa</h3>
+            <p>China, détente, triângulo estratégico.</p>
+          </div>
+          <span class="index-cta">Abrir →</span>
         </a>
-        <a class="entry" href={`${base}presidencia/`}>
-          <span>02</span>
-          <h3>Presidência</h3>
-          <p>EPA, leis, capacidade de Estado.</p>
+        <a class="index-row" href={`${base}presidencia/`}>
+          <span class="card-meta">Eixo 2</span>
+          <div>
+            <h3>Presidência</h3>
+            <p>EPA, leis, capacidade de Estado.</p>
+          </div>
+          <span class="index-cta">Abrir →</span>
         </a>
-        <a class="entry" href={`${base}brasil/`}>
-          <span>03</span>
-          <h3>Nixon e o Brasil</h3>
-          <p>Potência regional, barganha, FRUS.</p>
+        <a class="index-row" href={`${base}brasil/`}>
+          <span class="card-meta">Eixo 3</span>
+          <div>
+            <h3>Nixon e o Brasil</h3>
+            <p>Potência regional, barganha, FRUS.</p>
+          </div>
+          <span class="index-cta">Abrir →</span>
         </a>
-        <a class="entry" href={`${base}biografia/`}>
-          <span>04</span>
-          <h3>Biografia</h3>
-          <p>Do outsider de Whittier ao retorno de 1968.</p>
+        <a class="index-row" href={`${base}biografia/`}>
+          <span class="card-meta">Eixo 4</span>
+          <div>
+            <h3>Biografia</h3>
+            <p>Do outsider de Whittier ao retorno de 1968.</p>
+          </div>
+          <span class="index-cta">Abrir →</span>
         </a>
       </div>
     </div>
@@ -159,11 +145,11 @@ function coverOf(article: (typeof articles)[number]) {
   <section class="section navy cta-brasil">
     <div class="shell cta-brasil-inner">
       <div>
-        <p class="kicker light">Hemisfério</p>
-        <h2>Washington tratou o Brasil como ator — não como figurante.</h2>
+        <p class="kicker light">Dossiê</p>
+        <h2>O Brasil no arquivo dos anos Nixon.</h2>
       </div>
       <div>
-        <p>Café, status regional, energia e fricção diplomática no arquivo dos anos Nixon.</p>
+        <p>Café, status regional, energia e fricção diplomática — os documentos que registram Washington tratando o Brasil como ator no hemisfério.</p>
         <div class="actions">
           <a class="btn primary" href={`${base}brasil/`}>Dossiê Brasil</a>
           <a class="btn ghost" href={`${base}artigos/brasil-potencia-regional/`}>Ler o ensaio</a>
