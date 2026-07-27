@@ -5,8 +5,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const base = import.meta.env.BASE_URL;
 const articles = (await getCollection('artigos', ({ data }) => !data.draft))
   .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
-const lead = articles[0];
-const rest = articles.slice(1, 5);
+
+// The homepage lead is an editorial decision, not merely the newest file.
+// China is the strongest institutional entry point while the corpus is still small.
+const lead = articles.find((article) => article.id === 'abertura-china') ?? articles[0];
+const rest = articles.filter((article) => article.id !== lead?.id).slice(0, 4);
 
 function coverOf(article: (typeof articles)[number]) {
   const raw = article.data.cover ?? '';
@@ -33,8 +36,8 @@ function coverOf(article: (typeof articles)[number]) {
         <p class="kicker light">1913 — 1994 · 37º Presidente dos Estados Unidos</p>
         <h1>Arquivo e ensaio sobre Richard Nixon, em português.</h1>
         <p class="hero-lead">
-          Publicação independente que examina o legado com documento na mesa:
-          a abertura da China, o Estado ambiental, a détente e o lugar do Brasil no hemisfério.
+          Publicação independente dedicada à vida, à Presidência e à política externa de Richard Nixon,
+          com fontes primárias, ensaios e traduções em português.
         </p>
         <div class="actions">
           <a class="btn primary" href={`${base}artigos/`}>Ler os artigos</a>
@@ -44,8 +47,8 @@ function coverOf(article: (typeof articles)[number]) {
     </div>
     <div class="hero-note">
       <div class="shell-wide">
-        <span>Fontes: Casa Branca · FRUS · NARA</span>
-        <span>Ollie Atkins / NARA · domínio público</span>
+        <span>Fontes-base: Nixon Library / NARA · FRUS · American Presidency Project</span>
+        <span>Fotografia: Ollie Atkins / NARA · domínio público</span>
       </div>
     </div>
   </section>
@@ -54,7 +57,7 @@ function coverOf(article: (typeof articles)[number]) {
     <section class="section white home-feature">
       <div class="shell-main">
         <div class="editorial-head">
-          <h2>Em destaque</h2>
+          <h2>Leitura em destaque</h2>
           <a href={`${base}artigos/`}>Todos os artigos →</a>
         </div>
 
@@ -87,38 +90,38 @@ function coverOf(article: (typeof articles)[number]) {
   <section class="section home-index-section">
     <div class="shell-main">
       <div class="editorial-head">
-        <h2>Seções</h2>
+        <h2>Percursos de pesquisa</h2>
       </div>
       <div class="index-list">
         <a class="index-row" href={`${base}politica-externa/`}>
-          <span class="card-meta">Eixo 1</span>
+          <span class="card-meta">Diplomacia</span>
           <div>
             <h3>Política externa</h3>
-            <p>China, détente, triângulo estratégico.</p>
+            <p>China, détente e o triângulo estratégico.</p>
           </div>
           <span class="index-cta">Abrir →</span>
         </a>
         <a class="index-row" href={`${base}presidencia/`}>
-          <span class="card-meta">Eixo 2</span>
+          <span class="card-meta">Governo</span>
           <div>
             <h3>Presidência</h3>
-            <p>EPA, leis, capacidade de Estado.</p>
+            <p>Instituições, legislação e capacidade de Estado.</p>
           </div>
           <span class="index-cta">Abrir →</span>
         </a>
         <a class="index-row" href={`${base}brasil/`}>
-          <span class="card-meta">Eixo 3</span>
+          <span class="card-meta">Dossiê bilateral</span>
           <div>
             <h3>Nixon e o Brasil</h3>
-            <p>Potência regional, barganha, FRUS.</p>
+            <p>Relações hemisféricas, barganha e documentos do FRUS.</p>
           </div>
           <span class="index-cta">Abrir →</span>
         </a>
         <a class="index-row" href={`${base}biografia/`}>
-          <span class="card-meta">Eixo 4</span>
+          <span class="card-meta">Trajetória</span>
           <div>
             <h3>Biografia</h3>
-            <p>Do outsider de Whittier ao retorno de 1968.</p>
+            <p>De Whittier à Casa Branca e aos anos posteriores à Presidência.</p>
           </div>
           <span class="index-cta">Abrir →</span>
         </a>
