@@ -18,10 +18,13 @@ for (const route of requiredRoutes) {
   await access(route, constants.R_OK);
 }
 
-const [home, recoveryCss, source] = await Promise.all([
+const [home, recoveryCss, motionCss, motionScript, source, motionLoader] = await Promise.all([
   readFile('dist/index.html', 'utf8'),
   readFile('src/styles/home-recovery.css', 'utf8'),
+  readFile('src/styles/motion.css', 'utf8'),
+  readFile('public/scripts/home-motion.js', 'utf8'),
   readFile('src/pages/index.astro', 'utf8'),
+  readFile('src/components/HomeMotion.astro', 'utf8'),
 ]);
 
 const forbiddenCopy = ['Sem desculpas', 'Arquivo · ensaio · apologia', 'quote-band', 'class="ticker"'];
@@ -31,7 +34,16 @@ for (const fragment of forbiddenCopy) {
   }
 }
 
-const requiredSourceFragments = ['shell-wide', 'editorial-grid', 'compact-list', 'hero-note'];
+const requiredSourceFragments = [
+  'shell-wide',
+  'editorial-grid',
+  'compact-list',
+  'hero-note',
+  'data-motion="hero"',
+  'data-motion="lead-story"',
+  'data-motion="index-row"',
+  '<HomeMotion />',
+];
 for (const fragment of requiredSourceFragments) {
   if (!source.includes(fragment)) {
     throw new Error(`Homepage is missing required structure: ${fragment}`);
@@ -42,8 +54,34 @@ if (!/\.hero-v2\s*\{[^}]*flex-direction:\s*column/s.test(recoveryCss)) {
   throw new Error('Hero regression: .hero-v2 must remain a vertical flex container.');
 }
 
+if (!motionCss.includes('@media (prefers-reduced-motion: reduce)')) {
+  throw new Error('Motion CSS must provide a reduced-motion fallback.');
+}
+
+if (!motionScript.includes("matchMedia('(prefers-reduced-motion: reduce)')")) {
+  throw new Error('Motion runtime must respect prefers-reduced-motion.');
+}
+
+const pinnedMotionAssets = [
+  'gsap@3.15.0/dist/gsap.min.js',
+  'gsap@3.15.0/dist/ScrollTrigger.min.js',
+  'scripts/home-motion.js',
+];
+for (const asset of pinnedMotionAssets) {
+  if (!motionLoader.includes(asset) || !home.includes(asset)) {
+    throw new Error(`Generated homepage is missing pinned motion asset: ${asset}`);
+  }
+}
+
+const forbiddenMotionFeatures = ['ScrollSmoother', 'scroll-behavior: smooth !important', 'color-burn', 'mix-blend-mode'];
+for (const fragment of forbiddenMotionFeatures) {
+  if (motionScript.includes(fragment) || motionCss.includes(fragment)) {
+    throw new Error(`Motion foundation includes a forbidden global effect: ${fragment}`);
+  }
+}
+
 if (!home.includes('Publicação histórica') || !home.includes('Nixon Brasil')) {
   throw new Error('Generated homepage is missing institutional identity.');
 }
 
-console.log(`Verified ${requiredRoutes.length} required routes and homepage recovery invariants.`);
+console.log(`Verified ${requiredRoutes.length} routes, homepage recovery, and editorial motion invariants.`);
