@@ -1,0 +1,78 @@
+:root {
+  --motion-instant: 120ms;
+  --motion-fast: 180ms;
+  --motion-base: 420ms;
+  --motion-slow: 900ms;
+  --motion-hero: 1400ms;
+  --ease-editorial: cubic-bezier(.22, 1, .36, 1);
+  --ease-mechanical: cubic-bezier(.19, 1, .22, 1);
+}
+
+.hero-note {
+  border-top: 0;
+  position: relative;
+}
+
+.hero-note-rule {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: rgba(255, 255, 255, .22);
+  transform-origin: left center;
+}
+
+.hero .btn {
+  transition:
+    background-color var(--motion-fast) var(--ease-mechanical),
+    border-color var(--motion-fast) var(--ease-mechanical),
+    color var(--motion-fast) var(--ease-mechanical),
+    transform var(--motion-fast) var(--ease-mechanical),
+    box-shadow var(--motion-fast) var(--ease-mechanical);
+}
+
+.hero .btn.primary:hover,
+.hero .btn.primary:focus-visible {
+  background: var(--gold);
+  border-color: var(--gold);
+  transform: translate3d(2px, -2px, 0);
+  box-shadow: -2px 2px 0 rgba(255, 255, 255, .72);
+}
+
+.hero .btn.ghost:hover,
+.hero .btn.ghost:focus-visible {
+  background: #fff;
+  border-color: #fff;
+  color: var(--navy);
+  transform: translate3d(2px, -2px, 0);
+}
+
+.index-row .index-cta,
+.index-row h3,
+.compact-story h3,
+.editorial-head a {
+  transition:
+    color var(--motion-fast) var(--ease-mechanical),
+    transform var(--motion-fast) var(--ease-mechanical);
+}
+
+.index-row:hover .index-cta,
+.index-row:focus-visible .index-cta {
+  transform: translateX(6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-motion] {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+}
