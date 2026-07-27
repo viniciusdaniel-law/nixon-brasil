@@ -28,7 +28,7 @@ function coverOf(article: (typeof articles)[number]) {
       fetchpriority="high"
       decoding="async"
     />
-    <div class="shell hero-content">
+    <div class="shell-wide hero-content">
       <div class="hero-copy">
         <p class="kicker light">1913 — 1994 · 37º Presidente dos Estados Unidos</p>
         <h1>Arquivo e ensaio sobre Richard Nixon, em português.</h1>
@@ -43,7 +43,7 @@ function coverOf(article: (typeof articles)[number]) {
       </div>
     </div>
     <div class="hero-note">
-      <div class="shell">
+      <div class="shell-wide">
         <span>Fontes: Casa Branca · FRUS · NARA</span>
         <span>Ollie Atkins / NARA · domínio público</span>
       </div>
@@ -51,59 +51,43 @@ function coverOf(article: (typeof articles)[number]) {
   </section>
 
   {lead && (
-    <section class="section white lead-section">
-      <div class="shell">
-        <div class="section-head tight">
-          <div>
-            <p class="kicker">Em destaque</p>
-            <h2>O que ler agora.</h2>
-          </div>
-          <a class="btn dark" href={`${base}artigos/`}>Todos os artigos</a>
+    <section class="section white home-feature">
+      <div class="shell-main">
+        <div class="editorial-head">
+          <h2>Em destaque</h2>
+          <a href={`${base}artigos/`}>Todos os artigos →</a>
         </div>
 
-        <a class="lead-card" href={`${base}artigos/${lead.id}/`}>
-          {coverOf(lead)
-            ? <img src={coverOf(lead)} alt={lead.data.coverAlt ?? ''} width="1200" height="675" loading="eager" decoding="async" />
-            : <div class="card-cover-fallback lead-fallback" aria-hidden="true">{lead.data.category}</div>}
-          <div class="lead-copy">
+        <div class="editorial-grid">
+          <a class="lead-story" href={`${base}artigos/${lead.id}/`}>
+            {coverOf(lead)
+              ? <img src={coverOf(lead)} alt={lead.data.coverAlt ?? ''} width="1200" height="675" loading="eager" decoding="async" />
+              : <div class="card-cover-fallback lead-fallback" aria-hidden="true">{lead.data.category}</div>}
             <span class="card-meta">{lead.data.category} · {lead.data.publishedAt.toLocaleDateString('pt-BR')}</span>
             <h3>{lead.data.title}</h3>
             <p>{lead.data.subtitle ?? lead.data.description}</p>
-            <span class="read-link">Ler o ensaio completo →</span>
-          </div>
-        </a>
+          </a>
 
-        {rest.length > 0 && (
-          <div class="home-article-grid">
-            {rest.map((article) => {
-              const cover = coverOf(article);
-              return (
-                <a class="home-article" href={`${base}artigos/${article.id}/`}>
-                  {cover
-                    ? <img src={cover} alt={article.data.coverAlt ?? ''} width="640" height="360" loading="lazy" decoding="async" />
-                    : <div class="card-cover-fallback" aria-hidden="true">{article.data.category}</div>}
-                  <div>
-                    <span class="card-meta">{article.data.category}</span>
-                    <h3>{article.data.title}</h3>
-                    <p>{article.data.description}</p>
-                  </div>
+          {rest.length > 0 && (
+            <div class="compact-list" aria-label="Outros artigos em destaque">
+              {rest.map((article) => (
+                <a class="compact-story" href={`${base}artigos/${article.id}/`}>
+                  <span class="card-meta">{article.data.category}</span>
+                  <h3>{article.data.title}</h3>
+                  <p>{article.data.description}</p>
                 </a>
-              );
-            })}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   )}
 
-  <section class="section">
-    <div class="shell">
-      <div class="section-head">
-        <div>
-          <p class="kicker">Mapa do site</p>
-          <h2>Seções.</h2>
-        </div>
-        <p>Escolha o eixo. Cada página liga narrativa a documento.</p>
+  <section class="section home-index-section">
+    <div class="shell-main">
+      <div class="editorial-head">
+        <h2>Seções</h2>
       </div>
       <div class="index-list">
         <a class="index-row" href={`${base}politica-externa/`}>
@@ -143,7 +127,7 @@ function coverOf(article: (typeof articles)[number]) {
   </section>
 
   <section class="section navy cta-brasil">
-    <div class="shell cta-brasil-inner">
+    <div class="shell-main cta-brasil-inner">
       <div>
         <p class="kicker light">Dossiê</p>
         <h2>O Brasil no arquivo dos anos Nixon.</h2>
