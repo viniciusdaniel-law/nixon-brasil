@@ -1,0 +1,178 @@
+:root {
+  --shell-wide: min(1480px, calc(100vw - 48px));
+  --shell-main: min(1240px, calc(100vw - 48px));
+  --shell-reading: min(760px, calc(100vw - 40px));
+}
+
+.shell-wide,
+.shell-main,
+.shell-reading {
+  margin-inline: auto;
+  width: 100%;
+}
+
+.shell-wide { width: var(--shell-wide); }
+.shell-main { width: var(--shell-main); }
+.shell-reading { width: var(--shell-reading); }
+
+/* Recovery: keep the hero content and source strip in a vertical flow. */
+.hero-v2 {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  min-height: min(78vh, 700px);
+}
+
+.hero-v2 .hero-content {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  padding: 88px 0 64px;
+  position: relative;
+  width: var(--shell-wide);
+  z-index: 2;
+}
+
+.hero-v2 .hero-copy { max-width: 760px; }
+
+.hero-note {
+  flex: 0 0 auto;
+  margin-top: auto;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+
+.hero-note .shell-wide {
+  color: #c9d4e3;
+  display: flex;
+  flex-wrap: wrap;
+  font-family: var(--sans);
+  font-size: .64rem;
+  gap: 8px 28px;
+  justify-content: space-between;
+  letter-spacing: .1em;
+  padding: 14px 0;
+  text-transform: uppercase;
+}
+
+.hero a:focus-visible,
+.section.navy a:focus-visible,
+.site-footer a:focus-visible {
+  outline-color: var(--gold);
+}
+
+/* Homepage: one lead story and a compact editorial rail. */
+.home-feature { padding: 72px 0 84px; }
+.home-index-section { padding-top: 0; }
+
+.editorial-head {
+  align-items: baseline;
+  border-bottom: 2px solid var(--navy);
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  padding-bottom: 12px;
+}
+
+.editorial-head h2 {
+  color: var(--navy);
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 3vw, 2.7rem);
+  font-weight: 400;
+  letter-spacing: -.02em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.editorial-head > a {
+  color: var(--red);
+  font-family: var(--sans);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.editorial-grid {
+  display: grid;
+  gap: clamp(28px, 4vw, 48px);
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, .85fr);
+}
+
+.lead-story { display: block; }
+.lead-story img,
+.lead-story .lead-fallback {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  min-height: 0;
+  object-fit: cover;
+  width: 100%;
+}
+
+.lead-story .card-meta { display: block; margin-top: 16px; }
+.lead-story h3 {
+  color: var(--navy);
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.08;
+  margin: 8px 0 10px;
+}
+.lead-story p {
+  color: var(--muted);
+  font-size: 1.08rem;
+  margin: 0;
+  max-width: 60ch;
+}
+.lead-story:hover h3 { color: var(--red); }
+
+.compact-list { border-top: 1px solid var(--line); }
+.compact-story {
+  border-bottom: 1px solid var(--line);
+  display: block;
+  padding: 18px 0;
+}
+.compact-story h3 {
+  color: var(--navy);
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 6px 0 4px;
+}
+.compact-story p { color: var(--muted); font-size: .95rem; margin: 0; }
+.compact-story:hover h3 { color: var(--red); }
+
+@media (max-width: 1100px) {
+  :root {
+    --shell-wide: calc(100% - 32px);
+    --shell-main: calc(100% - 32px);
+  }
+
+  .editorial-grid { grid-template-columns: minmax(0, 1.25fr) minmax(260px, .85fr); }
+  .index-row { grid-template-columns: 150px 1fr auto; }
+}
+
+@media (max-width: 860px) {
+  .hero-v2 .hero-content { padding: 68px 0 44px; }
+  .editorial-grid { grid-template-columns: 1fr; }
+  .index-row { grid-template-columns: 1fr; gap: 6px; }
+  .index-cta { display: inline; }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --shell-wide: calc(100% - 24px);
+    --shell-main: calc(100% - 24px);
+    --shell-reading: calc(100% - 32px);
+  }
+
+  .hero-v2 { min-height: 0; }
+  .hero-v2 .hero-content { padding: 56px 0 36px; }
+  .hero-note .shell-wide { justify-content: flex-start; }
+  .editorial-head { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .home-feature { padding: 52px 0 64px; }
+  .home-index-section { padding-bottom: 64px; }
+}

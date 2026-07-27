@@ -5,8 +5,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const base = import.meta.env.BASE_URL;
 const articles = (await getCollection('artigos', ({ data }) => !data.draft))
   .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
-const lead = articles[0];
-const rest = articles.slice(1, 5);
+
+// The homepage lead is an editorial decision, not merely the newest file.
+// China is the strongest institutional entry point while the corpus is still small.
+const lead = articles.find((article) => article.id === 'abertura-china') ?? articles[0];
+const rest = articles.filter((article) => article.id !== lead?.id).slice(0, 4);
 
 function coverOf(article: (typeof articles)[number]) {
   const raw = article.data.cover ?? '';
@@ -28,13 +31,13 @@ function coverOf(article: (typeof articles)[number]) {
       fetchpriority="high"
       decoding="async"
     />
-    <div class="shell hero-content">
+    <div class="shell-wide hero-content">
       <div class="hero-copy">
         <p class="kicker light">1913 — 1994 · 37º Presidente dos Estados Unidos</p>
         <h1>Arquivo e ensaio sobre Richard Nixon, em português.</h1>
         <p class="hero-lead">
-          Publicação independente que examina o legado com documento na mesa:
-          a abertura da China, o Estado ambiental, a détente e o lugar do Brasil no hemisfério.
+          Publicação independente dedicada à vida, à Presidência e à política externa de Richard Nixon,
+          com fontes primárias, ensaios e traduções em português.
         </p>
         <div class="actions">
           <a class="btn primary" href={`${base}artigos/`}>Ler os artigos</a>
@@ -43,98 +46,82 @@ function coverOf(article: (typeof articles)[number]) {
       </div>
     </div>
     <div class="hero-note">
-      <div class="shell">
-        <span>Fontes: Casa Branca · FRUS · NARA</span>
-        <span>Ollie Atkins / NARA · domínio público</span>
+      <div class="shell-wide">
+        <span>Fontes-base: Nixon Library / NARA · FRUS · American Presidency Project</span>
+        <span>Fotografia: Ollie Atkins / NARA · domínio público</span>
       </div>
     </div>
   </section>
 
   {lead && (
-    <section class="section white lead-section">
-      <div class="shell">
-        <div class="section-head tight">
-          <div>
-            <p class="kicker">Em destaque</p>
-            <h2>O que ler agora.</h2>
-          </div>
-          <a class="btn dark" href={`${base}artigos/`}>Todos os artigos</a>
+    <section class="section white home-feature">
+      <div class="shell-main">
+        <div class="editorial-head">
+          <h2>Leitura em destaque</h2>
+          <a href={`${base}artigos/`}>Todos os artigos →</a>
         </div>
 
-        <a class="lead-card" href={`${base}artigos/${lead.id}/`}>
-          {coverOf(lead)
-            ? <img src={coverOf(lead)} alt={lead.data.coverAlt ?? ''} width="1200" height="675" loading="eager" decoding="async" />
-            : <div class="card-cover-fallback lead-fallback" aria-hidden="true">{lead.data.category}</div>}
-          <div class="lead-copy">
+        <div class="editorial-grid">
+          <a class="lead-story" href={`${base}artigos/${lead.id}/`}>
+            {coverOf(lead)
+              ? <img src={coverOf(lead)} alt={lead.data.coverAlt ?? ''} width="1200" height="675" loading="eager" decoding="async" />
+              : <div class="card-cover-fallback lead-fallback" aria-hidden="true">{lead.data.category}</div>}
             <span class="card-meta">{lead.data.category} · {lead.data.publishedAt.toLocaleDateString('pt-BR')}</span>
             <h3>{lead.data.title}</h3>
             <p>{lead.data.subtitle ?? lead.data.description}</p>
-            <span class="read-link">Ler o ensaio completo →</span>
-          </div>
-        </a>
+          </a>
 
-        {rest.length > 0 && (
-          <div class="home-article-grid">
-            {rest.map((article) => {
-              const cover = coverOf(article);
-              return (
-                <a class="home-article" href={`${base}artigos/${article.id}/`}>
-                  {cover
-                    ? <img src={cover} alt={article.data.coverAlt ?? ''} width="640" height="360" loading="lazy" decoding="async" />
-                    : <div class="card-cover-fallback" aria-hidden="true">{article.data.category}</div>}
-                  <div>
-                    <span class="card-meta">{article.data.category}</span>
-                    <h3>{article.data.title}</h3>
-                    <p>{article.data.description}</p>
-                  </div>
+          {rest.length > 0 && (
+            <div class="compact-list" aria-label="Outros artigos em destaque">
+              {rest.map((article) => (
+                <a class="compact-story" href={`${base}artigos/${article.id}/`}>
+                  <span class="card-meta">{article.data.category}</span>
+                  <h3>{article.data.title}</h3>
+                  <p>{article.data.description}</p>
                 </a>
-              );
-            })}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   )}
 
-  <section class="section">
-    <div class="shell">
-      <div class="section-head">
-        <div>
-          <p class="kicker">Mapa do site</p>
-          <h2>Seções.</h2>
-        </div>
-        <p>Escolha o eixo. Cada página liga narrativa a documento.</p>
+  <section class="section home-index-section">
+    <div class="shell-main">
+      <div class="editorial-head">
+        <h2>Percursos de pesquisa</h2>
       </div>
       <div class="index-list">
         <a class="index-row" href={`${base}politica-externa/`}>
-          <span class="card-meta">Eixo 1</span>
+          <span class="card-meta">Diplomacia</span>
           <div>
             <h3>Política externa</h3>
-            <p>China, détente, triângulo estratégico.</p>
+            <p>China, détente e o triângulo estratégico.</p>
           </div>
           <span class="index-cta">Abrir →</span>
         </a>
         <a class="index-row" href={`${base}presidencia/`}>
-          <span class="card-meta">Eixo 2</span>
+          <span class="card-meta">Governo</span>
           <div>
             <h3>Presidência</h3>
-            <p>EPA, leis, capacidade de Estado.</p>
+            <p>Instituições, legislação e capacidade de Estado.</p>
           </div>
           <span class="index-cta">Abrir →</span>
         </a>
         <a class="index-row" href={`${base}brasil/`}>
-          <span class="card-meta">Eixo 3</span>
+          <span class="card-meta">Dossiê bilateral</span>
           <div>
             <h3>Nixon e o Brasil</h3>
-            <p>Potência regional, barganha, FRUS.</p>
+            <p>Relações hemisféricas, barganha e documentos do FRUS.</p>
           </div>
           <span class="index-cta">Abrir →</span>
         </a>
         <a class="index-row" href={`${base}biografia/`}>
-          <span class="card-meta">Eixo 4</span>
+          <span class="card-meta">Trajetória</span>
           <div>
             <h3>Biografia</h3>
-            <p>Do outsider de Whittier ao retorno de 1968.</p>
+            <p>De Whittier à Casa Branca e aos anos posteriores à Presidência.</p>
           </div>
           <span class="index-cta">Abrir →</span>
         </a>
@@ -143,7 +130,7 @@ function coverOf(article: (typeof articles)[number]) {
   </section>
 
   <section class="section navy cta-brasil">
-    <div class="shell cta-brasil-inner">
+    <div class="shell-main cta-brasil-inner">
       <div>
         <p class="kicker light">Dossiê</p>
         <h2>O Brasil no arquivo dos anos Nixon.</h2>
