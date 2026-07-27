@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro check && astro build && node scripts/verify-site.mjs",
     "preview": "astro preview"
   },
   "dependencies": {
