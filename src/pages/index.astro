@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeMotion from '../components/HomeMotion.astro';
+import '../styles/motion.css';
 
 const base = import.meta.env.BASE_URL;
 const articles = (await getCollection('artigos', ({ data }) => !data.draft))
@@ -21,9 +23,10 @@ function coverOf(article: (typeof articles)[number]) {
   title="Nixon Brasil"
   description="Publicação histórica e acervo digital sobre Richard Nixon em português: biografia, presidência, política externa e o dossiê Brasil."
 >
-  <section class="hero hero-v2">
+  <section class="hero hero-v2" data-motion="hero">
     <img
       class="hero-media"
+      data-motion="hero-media"
       src="https://commons.wikimedia.org/wiki/Special:Redirect/file/NIXONcampaigns.jpg"
       alt="Richard Nixon em campanha diante de uma multidão em 1968"
       width="1600"
@@ -33,22 +36,23 @@ function coverOf(article: (typeof articles)[number]) {
     />
     <div class="shell-wide hero-content">
       <div class="hero-copy">
-        <p class="kicker light">1913 — 1994 · 37º Presidente dos Estados Unidos</p>
-        <h1>Arquivo e ensaio sobre Richard Nixon, em português.</h1>
-        <p class="hero-lead">
+        <p class="kicker light" data-motion="hero-kicker">1913 — 1994 · 37º Presidente dos Estados Unidos</p>
+        <h1 data-motion="hero-title">Arquivo e ensaio sobre Richard Nixon, em português.</h1>
+        <p class="hero-lead" data-motion="hero-lead">
           Publicação independente dedicada à vida, à Presidência e à política externa de Richard Nixon,
           com fontes primárias, ensaios e traduções em português.
         </p>
-        <div class="actions">
+        <div class="actions" data-motion="hero-actions">
           <a class="btn primary" href={`${base}artigos/`}>Ler os artigos</a>
           <a class="btn ghost" href={`${base}acervo/`}>Abrir o acervo</a>
         </div>
       </div>
     </div>
     <div class="hero-note">
+      <span class="hero-note-rule" data-motion="hero-rule" aria-hidden="true"></span>
       <div class="shell-wide">
-        <span>Fontes-base: Nixon Library / NARA · FRUS · American Presidency Project</span>
-        <span>Fotografia: Ollie Atkins / NARA · domínio público</span>
+        <span data-motion="hero-source">Fontes-base: Nixon Library / NARA · FRUS · American Presidency Project</span>
+        <span data-motion="hero-source">Fotografia: Ollie Atkins / NARA · domínio público</span>
       </div>
     </div>
   </section>
@@ -56,13 +60,13 @@ function coverOf(article: (typeof articles)[number]) {
   {lead && (
     <section class="section white home-feature">
       <div class="shell-main">
-        <div class="editorial-head">
+        <div class="editorial-head" data-motion="section-head">
           <h2>Leitura em destaque</h2>
           <a href={`${base}artigos/`}>Todos os artigos →</a>
         </div>
 
         <div class="editorial-grid">
-          <a class="lead-story" href={`${base}artigos/${lead.id}/`}>
+          <a class="lead-story" data-motion="lead-story" href={`${base}artigos/${lead.id}/`}>
             {coverOf(lead)
               ? <img src={coverOf(lead)} alt={lead.data.coverAlt ?? ''} width="1200" height="675" loading="eager" decoding="async" />
               : <div class="card-cover-fallback lead-fallback" aria-hidden="true">{lead.data.category}</div>}
@@ -74,7 +78,7 @@ function coverOf(article: (typeof articles)[number]) {
           {rest.length > 0 && (
             <div class="compact-list" aria-label="Outros artigos em destaque">
               {rest.map((article) => (
-                <a class="compact-story" href={`${base}artigos/${article.id}/`}>
+                <a class="compact-story" data-motion="compact-story" href={`${base}artigos/${article.id}/`}>
                   <span class="card-meta">{article.data.category}</span>
                   <h3>{article.data.title}</h3>
                   <p>{article.data.description}</p>
@@ -89,11 +93,11 @@ function coverOf(article: (typeof articles)[number]) {
 
   <section class="section home-index-section">
     <div class="shell-main">
-      <div class="editorial-head">
+      <div class="editorial-head" data-motion="section-head">
         <h2>Percursos de pesquisa</h2>
       </div>
       <div class="index-list">
-        <a class="index-row" href={`${base}politica-externa/`}>
+        <a class="index-row" data-motion="index-row" href={`${base}politica-externa/`}>
           <span class="card-meta">Diplomacia</span>
           <div>
             <h3>Política externa</h3>
@@ -101,7 +105,7 @@ function coverOf(article: (typeof articles)[number]) {
           </div>
           <span class="index-cta">Abrir →</span>
         </a>
-        <a class="index-row" href={`${base}presidencia/`}>
+        <a class="index-row" data-motion="index-row" href={`${base}presidencia/`}>
           <span class="card-meta">Governo</span>
           <div>
             <h3>Presidência</h3>
@@ -109,7 +113,7 @@ function coverOf(article: (typeof articles)[number]) {
           </div>
           <span class="index-cta">Abrir →</span>
         </a>
-        <a class="index-row" href={`${base}brasil/`}>
+        <a class="index-row" data-motion="index-row" href={`${base}brasil/`}>
           <span class="card-meta">Dossiê bilateral</span>
           <div>
             <h3>Nixon e o Brasil</h3>
@@ -117,7 +121,7 @@ function coverOf(article: (typeof articles)[number]) {
           </div>
           <span class="index-cta">Abrir →</span>
         </a>
-        <a class="index-row" href={`${base}biografia/`}>
+        <a class="index-row" data-motion="index-row" href={`${base}biografia/`}>
           <span class="card-meta">Trajetória</span>
           <div>
             <h3>Biografia</h3>
@@ -129,7 +133,7 @@ function coverOf(article: (typeof articles)[number]) {
     </div>
   </section>
 
-  <section class="section navy cta-brasil">
+  <section class="section navy cta-brasil" data-motion="dossier">
     <div class="shell-main cta-brasil-inner">
       <div>
         <p class="kicker light">Dossiê</p>
@@ -144,4 +148,6 @@ function coverOf(article: (typeof articles)[number]) {
       </div>
     </div>
   </section>
+
+  <HomeMotion />
 </BaseLayout>
