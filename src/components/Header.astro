@@ -10,43 +10,28 @@ const links = [
   ['Artigos', 'artigos/'],
   ['Vídeos', 'videos/'],
 ];
+
+const active = (href: string) => path === `${base}${href}` || path.startsWith(`${base}${href}`);
 ---
-<div class="utility-bar">
-  <div class="shell utility-inner">
-    <span>Publicação histórica independente · PT-BR</span>
-    <a href={`${base}sobre/`}>Linha editorial</a>
-  </div>
-</div>
 <header class="site-header">
   <div class="shell nav-row">
     <a class="wordmark" href={base} aria-label="Nixon Brasil, início">
       <strong>NIXON BRASIL</strong>
       <span>Richard Nixon em português</span>
     </a>
-    <button class="menu-toggle" aria-expanded="false" aria-controls="menu">Menu</button>
-    <nav id="menu" class="main-nav" aria-label="Navegação principal">
-      {links.map(([label, href]) => (
-        <a class:list={{ active: path.includes(`/${href}`) }} href={`${base}${href}`}>{label}</a>
-      ))}
-    </nav>
+    <details class="nav-menu">
+      <summary>Menu</summary>
+      <nav class="main-nav" aria-label="Navegação principal">
+        {links.map(([label, href]) => (
+          <a
+            class:list={{ active: active(href) }}
+            aria-current={active(href) ? 'page' : undefined}
+            href={`${base}${href}`}
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+    </details>
   </div>
 </header>
-<script is:inline>
-  const button = document.querySelector('.menu-toggle');
-  const menu = document.querySelector('#menu');
-  const setOpen = (open) => {
-    button?.setAttribute('aria-expanded', String(open));
-    menu?.classList.toggle('open', open);
-    document.body.classList.toggle('nav-open', open);
-  };
-  button?.addEventListener('click', () => {
-    const open = button.getAttribute('aria-expanded') === 'true';
-    setOpen(!open);
-  });
-  menu?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => setOpen(false));
-  });
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') setOpen(false);
-  });
-</script>

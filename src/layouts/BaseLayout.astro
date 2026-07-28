@@ -2,13 +2,15 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
-import '../styles/home-recovery.css';
 
 interface Props {
   title: string;
   description: string;
   image?: string;
   type?: 'website' | 'article';
+  publishedAt?: Date;
+  updatedAt?: Date;
+  author?: string;
 }
 
 const {
@@ -16,11 +18,37 @@ const {
   description,
   image = 'https://commons.wikimedia.org/wiki/Special:Redirect/file/NIXONcampaigns.jpg',
   type = 'website',
+  publishedAt,
+  updatedAt,
+  author,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const fullTitle = title === 'Nixon Brasil' ? title : `${title} — Nixon Brasil`;
 const base = import.meta.env.BASE_URL;
+const structuredData = type === 'article'
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: title,
+      description,
+      image,
+      url: canonical.toString(),
+      inLanguage: 'pt-BR',
+      datePublished: publishedAt?.toISOString(),
+      dateModified: (updatedAt ?? publishedAt)?.toISOString(),
+      author: { '@type': 'Organization', name: author ?? 'Nixon Brasil' },
+      publisher: { '@type': 'Organization', name: 'Nixon Brasil' },
+    }
+  : {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Nixon Brasil',
+      description,
+      url: canonical.toString(),
+      inLanguage: 'pt-BR',
+      publisher: { '@type': 'Organization', name: 'Nixon Brasil' },
+    };
 ---
 <!doctype html>
 <html lang="pt-BR">
@@ -43,19 +71,11 @@ const base = import.meta.env.BASE_URL;
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={image} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
     <title>{fullTitle}</title>
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': type === 'article' ? 'Article' : 'WebSite',
-      name: fullTitle,
-      description,
-      url: canonical.toString(),
-      inLanguage: 'pt-BR',
-      publisher: {
-        '@type': 'Organization',
-        name: 'Nixon Brasil',
-      },
-    })} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
     <a class="skip" href="#conteudo">Pular para o conteúdo</a>

@@ -1,62 +1,52 @@
 # Nixon Brasil
 
-Site independente em português sobre a vida, a Presidência, a política externa e o legado de Richard Nixon.
+Publicação independente em português sobre a vida, a Presidência e a política externa de Richard Nixon.
 
-## Site
+**Site:** [nixonbrazil.page](https://nixonbrazil.page)
 
-https://viniciusdaniel-law.github.io/nixon-brasil/
+O acervo editorial é formado por artigos em Markdown e fichas de documentos históricos. As páginas são compiladas com Astro e publicadas no GitHub Pages.
 
-## O que tem aqui
-
-- páginas sobre biografia, Presidência, política externa e Nixon no Brasil
-- artigos em Markdown
-- acervo com links para fontes
-- painel de edição (Pages CMS)
-- RSS e sitemap
-- notas para Instagram, X e legendagem de vídeo
-- publicação automática no GitHub Pages
-
-## Pastas principais
+## Estrutura
 
 ```text
-src/pages/           páginas do site
-src/content/artigos/ artigos
-src/content/documentos/  acervo
-src/components/      cabeçalho e rodapé
-src/layouts/         layout base
-public/uploads/      imagens do CMS
-.pages.yml           config do painel
+src/content/artigos/     artigos publicados e rascunhos
+src/content/documentos/  fichas do acervo
+src/pages/               páginas e rotas
+src/components/          cabeçalho e rodapé
+src/styles/              estilos gerais e da página inicial
+public/uploads/           imagens enviadas pelo CMS
+.pages.yml                configuração do painel editorial
 ```
 
-## Rotas
+## Edição
 
-- `/` — início
-- `/biografia/`
-- `/presidencia/`
-- `/politica-externa/`
-- `/brasil/`
-- `/artigos/`
-- `/acervo/`
-- `/videos/`
-- `/sobre/`
+O uso cotidiano não exige alterar código. O [Pages CMS](https://app.pagescms.org/) edita os artigos e documentos diretamente no repositório. Consulte:
 
-## Documentação
+- [`docs/CMS.md`](docs/CMS.md) — publicar e organizar conteúdo;
+- [`docs/GUIA-DE-EDICAO.md`](docs/GUIA-DE-EDICAO.md) — revisão, teste e manutenção;
+- [`docs/DOMINIO.md`](docs/DOMINIO.md) — DNS e GitHub Pages;
+- [`docs/OPERACAO-SOCIAL.md`](docs/OPERACAO-SOCIAL.md) — adaptação para redes;
+- [`docs/TRADUCAO-DE-VIDEO.md`](docs/TRADUCAO-DE-VIDEO.md) — transcrição e legendagem.
 
-- [`docs/CMS.md`](docs/CMS.md) — como editar no Pages CMS
-- [`docs/OPERACAO-SOCIAL.md`](docs/OPERACAO-SOCIAL.md) — redes
-- [`docs/TRADUCAO-DE-VIDEO.md`](docs/TRADUCAO-DE-VIDEO.md) — legendagem
-- [`SECURITY.md`](SECURITY.md) — segurança
+## Desenvolvimento local
 
-## Desenvolvimento
+Requer Node.js 24.
 
 ```bash
-npm install
+npm ci
 npm run dev
+```
+
+Antes de enviar uma alteração:
+
+```bash
 npm run build
 ```
 
-Push na `main` gera build e deploy no GitHub Pages. PRs só compilam.
+O comando verifica os tipos, compila todas as rotas e testa navegação, metadados e configuração editorial.
 
-## Situação
+## Publicação
 
-Projeto independente, sem vínculo com a Richard Nixon Foundation, a Nixon Library ou a NARA.
+Pull requests executam o build. Alterações incorporadas à `main` são publicadas pelo workflow [`pages.yml`](.github/workflows/pages.yml).
+
+O Nixon Brasil não possui vínculo com a Richard Nixon Foundation, a Richard Nixon Presidential Library, a NARA ou o governo dos Estados Unidos.

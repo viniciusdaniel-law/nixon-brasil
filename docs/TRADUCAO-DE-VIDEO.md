@@ -1,6 +1,6 @@
 # Tradução de vídeo — Nixon Brasil
 
-## Stack FOSS
+## Ferramentas
 
 - `yt-dlp`: obtenção do arquivo quando a fonte e os direitos permitirem.
 - `ffmpeg`: extração de áudio, corte, normalização e exportação.
@@ -8,7 +8,7 @@
 - `Subtitle Edit` ou `Aegisub`: revisão, sincronização e quebra de legendas.
 - `Kdenlive`: montagem, cartelas, créditos e exportação vertical/horizontal.
 
-## Pipeline
+## Fluxo de trabalho
 
 1. Registrar URL, título, data, titular, licença e permissão de reutilização.
 2. Baixar a melhor fonte disponível sem remover marcas ou créditos do original.
@@ -23,16 +23,16 @@
 ## Comandos-base
 
 ```bash
-# extrair áudio
+# Extrair áudio
 ffmpeg -i video.mp4 -vn -ac 1 -ar 16000 audio.wav
 
-# transcrever com whisper.cpp
+# Transcrever com whisper.cpp
 whisper-cli -m models/ggml-medium.en.bin -f audio.wav -osrt -otxt
 
-# incorporar legendas
+# Incorporar legendas
 ffmpeg -i video.mp4 -vf "subtitles=legenda-ptbr.srt" -c:a copy video-ptbr.mp4
 
-# vertical 1080x1920 com enquadramento central
+# Gerar versão vertical 1080 × 1920 com enquadramento central
 ffmpeg -i video.mp4 -vf "scale=-2:1920,crop=1080:1920" -c:a aac -b:a 192k reel.mp4
 ```
 

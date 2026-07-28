@@ -11,4 +11,6 @@ translationStatus: "Tradução em preparação"
 description: "Discurso em que Nixon aceita a nomeação e articula ordem, paz e o chamado ao eleitorado que sustentaria a ideia de maioria silenciosa."
 ---
 
-Texto integral no American Presidency Project. Peça de campanha e de doutrina política: o tom de 1968 está aqui, sem intermediário. Tradução editorial em português entrará no fluxo do acervo.
+Texto integral no American Presidency Project. O discurso organiza os principais temas da campanha republicana de 1968: ordem pública, política externa, unidade nacional e crítica à administração Johnson.
+
+A tradução editorial em português está em preparação.

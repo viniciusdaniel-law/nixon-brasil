@@ -1,38 +1,56 @@
-# Operação social — Nixon Brasil
+# Publicação em redes
 
-## Papel de cada canal
+O site guarda a versão integral e as referências. Instagram e X distribuem recortes que remetem ao artigo, ao documento ou à página correspondente.
 
-- **Site:** arquivo permanente, artigos, fontes, traduções integrais e páginas institucionais.
-- **Instagram:** descoberta visual; carrosséis, fotografias, Reels legendados e séries biográficas.
-- **X:** distribuição rápida; fios documentais, datas históricas, citações verificadas e ligação direta às fontes.
+## Unidade de trabalho
 
-## Séries iniciais
+Cada artigo pode gerar:
 
-1. **Antes da Casa Branca** — juventude, formação, guerra, Congresso e Vice-Presidência.
-2. **O retorno impossível** — 1960, 1962, reconstrução partidária e 1968.
-3. **Uma decisão presidencial** — uma política, um documento e seu efeito institucional.
-4. **Nixon no mundo** — China, détente, União Soviética e diplomacia triangular.
-5. **Nixon e o Brasil** — comércio, café, pesca, energia e documentos bilaterais.
-6. **Do arquivo** — fotografia ou memorando com procedência completa.
+1. um carrossel de seis a oito páginas;
+2. uma fotografia comentada;
+3. um vídeo curto com trecho de fonte;
+4. uma sequência de notas no X;
+5. uma ficha de documento para o acervo.
 
-## Cadência de lançamento
+Nem todo artigo precisa produzir os cinco formatos. A fonte disponível determina o formato.
 
-- Instagram: 3 publicações semanais; 1 Reel, 1 carrossel, 1 fotografia comentada.
-- X: 5 a 7 publicações semanais; 1 fio documental e posts derivados do conteúdo do site.
-- Site: 1 artigo ou dossiê substancial por semana.
+## Séries
 
-## Regra editorial
+- **Antes da Casa Branca:** infância, formação, guerra, Congresso e Vice-Presidência.
+- **1960–1968:** derrota, reconstrução partidária e retorno.
+- **Decisões de governo:** uma medida, seu contexto institucional e seus efeitos.
+- **Política externa:** China, União Soviética, Vietnã e diplomacia triangular.
+- **Nixon e o Brasil:** comércio, segurança, energia e documentos bilaterais.
+- **Documento comentado:** uma peça de arquivo, com procedência e contexto.
 
-Toda publicação deve registrar: título, data histórica, fonte, URL original, situação de direitos, tradução responsável e link para a página correspondente no site.
+## Carrossel
 
-## Estrutura de crédito
+1. capa: título factual e imagem;
+2. contexto: data, lugar e problema;
+3. documento: trecho curto ou reprodução;
+4. decisão: o que ocorreu;
+5. consequência: efeito imediato e limite;
+6. controvérsia: evidência contrária ou disputa de interpretação;
+7. fonte: instituição, coleção, identificação e URL;
+8. chamada: link para o artigo completo.
 
-`Fonte: [instituição], [coleção/documento], [data], [identificador]. Tradução e edição: Nixon Brasil. Projeto independente.`
+Evite converter cada página em uma frase de impacto. Duas ou três frases curtas por quadro preservam contexto sem transformar o carrossel em artigo.
 
-## Métricas úteis
+## Crédito
 
-- Cliques das redes para o site.
-- Salvamentos e compartilhamentos no Instagram.
-- Conclusão de vídeo e retenção nos primeiros 3 segundos.
-- Impressões e expansão de fios no X.
-- Inscrições ou contatos institucionais gerados pelo portal.
+Modelo:
+
+`Fonte: [instituição], [coleção ou documento], [data], [identificador]. Imagem: [autor ou órgão], [licença]. Tradução e edição: Nixon Brasil.`
+
+## Controle editorial
+
+Antes de publicar, confira:
+
+- nomes e datas;
+- correspondência entre imagem e episódio;
+- literalidade de citações;
+- diferença entre tradução e paráfrase;
+- licença do material;
+- link funcional para o conteúdo integral.
+
+Meça cliques para o site, salvamentos, compartilhamentos e retenção de vídeo. Alcance isolado não informa se o público chegou ao documento ou ao argumento completo.
