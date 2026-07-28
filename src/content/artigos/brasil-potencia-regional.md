@@ -1,6 +1,6 @@
 ---
 title: "Quando Washington tratou o Brasil como potência regional"
-subtitle: "Os memorandos dos anos Nixon registram cooperação estratégica, negociação econômica e os limites de uma relação com a ditadura Médici."
+subtitle: "Os memorandos dos anos Nixon registram consulta estratégica, negociação econômica e reconhecimento do Brasil como ator continental."
 description: "O lugar do Brasil na política hemisférica da administração Nixon, a partir de documentos da Casa Branca e do Departamento de Estado."
 publishedAt: 2026-07-21
 updatedAt: 2026-07-28
@@ -20,9 +20,9 @@ O registro completo, reunido no [volume E–10 do *Foreign Relations of the Unit
 
 ## Consulta estratégica
 
-Nixon via o tamanho territorial, a população e o crescimento econômico brasileiro como ativos de poder. A Casa Branca procurava interlocução sobre Argentina, Chile, Uruguai, Bolívia e Cuba; Médici, por sua vez, buscava reconhecimento de status e continuidade da cooperação militar.
+Nixon via o tamanho territorial, a população e o crescimento econômico brasileiro como ativos de poder. A Casa Branca procurava interlocução sobre a América do Sul e o Caribe; Médici, por sua vez, buscava reconhecimento de status e continuidade da cooperação militar.
 
-A conversa de dezembro é também um documento incômodo. Nixon informou que parlamentares americanos criticavam o caráter autoritário do regime brasileiro e pretendiam reduzir a assistência militar. Médici defendeu a manutenção dos contatos entre as Forças Armadas. O memorando, portanto, registra ao mesmo tempo a importância estratégica atribuída ao Brasil e a disposição de Washington para cooperar com uma ditadura.
+O memorando mostra uma relação entre governos com interesses próprios. Nixon mencionou as críticas do Congresso americano ao caráter autoritário do regime brasileiro; Médici defendeu a continuidade dos contatos militares. O registro preserva tanto a importância estratégica atribuída ao Brasil quanto o contexto político da interlocução.
 
 ## Uma pauta econômica concreta
 
@@ -36,10 +36,8 @@ O governo brasileiro defendia seus próprios objetivos em temas como comércio, 
 
 Ler a documentação pela fricção ajuda a evitar duas simplificações. O Brasil não era irrelevante para a estratégia dos Estados Unidos, mas também não ocupava uma posição equivalente à dos aliados centrais da Europa e da Ásia. A noção de potência regional descrevia peso e utilidade; não significava igualdade.
 
-## O problema político da aproximação
+## Contexto brasileiro
 
-A relação se desenvolveu durante os anos mais repressivos da ditadura brasileira. Censura, tortura e perseguição política não podem ser deslocadas para uma nota lateral. Elas condicionavam a legitimidade do governo Médici e alimentavam a oposição no Congresso americano.
+A relação se desenvolveu sob o governo autoritário de Emílio Garrastazu Médici. Reconhecer o peso estratégico atribuído ao Brasil não exige transformar esse regime em modelo nem tratar cooperação externa como aprovação de sua política interna.
 
-Isso não reduz o arquivo bilateral a uma única dimensão. Ao contrário: permite entender por que crescimento econômico, cooperação militar e autoritarismo aparecem no mesmo conjunto documental. A política de Nixon para o Brasil combinou interesse estratégico com tolerância a um regime responsável por graves violações de direitos humanos.
-
-Para o leitor brasileiro, esses memorandos oferecem uma questão ainda atual: como buscar cooperação com os Estados Unidos sem confundir parceria com subordinação? A resposta dos anos 1970 foi contraditória, mas o fato de Washington ter tratado o Brasil como ator relevante — e não apenas como cenário — merece atenção histórica.
+Para o leitor brasileiro, o dado central dos memorandos é a posição reservada ao país: Washington o tratava como interlocutor regional, negociava interesses materiais e reconhecia sua margem de ação. O dossiê existe para tornar essa documentação acessível em português.

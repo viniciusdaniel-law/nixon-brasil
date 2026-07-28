@@ -46,4 +46,4 @@ Também houve limites. Em 1972, Nixon vetou as amplas emendas à legislação de
 
 O mérito da administração Nixon foi reconhecer que o tema exigia instituições, orçamento, corpo técnico e regras de decisão. NEPA, EPA e Clean Air Act combinaram essas dimensões e sobreviveram a sucessivas mudanças de governo.
 
-Watergate domina justificadamente a memória do fim da Presidência, mas não oferece uma explicação suficiente para o conjunto do mandato. Na política ambiental, o registro é concreto: entre 1969 e 1970, a estrutura federal adquiriu instrumentos que continuam centrais à regulação nos Estados Unidos.
+Na política ambiental, o registro da administração Nixon é concreto: entre 1969 e 1970, a estrutura federal adquiriu instrumentos que continuam centrais à regulação nos Estados Unidos. A permanência dessas instituições é a medida mais clara de seu alcance.

@@ -1,5 +1,21 @@
 # Guia de edição
 
+## Definição do produto
+
+O Nixon Brasil é um produto editorial brasileiro voltado à preservação e à divulgação do legado de Richard Nixon. A referência de categoria é o trabalho público da Richard Nixon Foundation: história presidencial, documentos, educação, vídeo, atualidade e comunidade. O projeto não copia sua marca nem se apresenta como afiliado enquanto não houver autorização formal.
+
+Prioridades:
+
+- Presidência e realizações de governo;
+- política externa, estratégia e diplomacia;
+- discursos, documentos e imagens de arquivo;
+- trajetória pessoal de Richard e Pat Nixon;
+- relações entre Estados Unidos e Brasil;
+- aplicação do legado a temas contemporâneos;
+- conteúdo próprio em português para site, vídeo e redes sociais.
+
+O site não é uma biografia adversarial nem um portal genérico sobre política americana. Assuntos controversos só entram quando forem o tema específico de uma publicação; não funcionam como compensação obrigatória em páginas sobre outro assunto. Watergate não integra a página inicial nem a comunicação promocional. O dossiê brasileiro não romantiza o governo Médici.
+
 ## Fluxo curto
 
 1. Reunir a fonte principal e as referências auxiliares.
@@ -16,11 +32,10 @@ Um artigo deve distinguir:
 
 - fato documentado;
 - interpretação do autor;
-- controvérsia historiográfica;
 - tradução ou paráfrase;
 - informação ainda incerta.
 
-A linha editorial pode ser favorável ao legado de Nixon. O texto perde força quando omite documento contrário, transforma avaliação em fato ou atribui ao presidente uma medida cuja autoria principal foi do Congresso.
+A linha editorial é favorável ao legado de Nixon. Rigor significa confirmar o que é publicado, atribuir corretamente a autoria de leis e decisões e não inventar causalidade; não significa inserir um parágrafo de oposição em todo texto.
 
 ## Estrutura de artigo
 

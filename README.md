@@ -1,10 +1,12 @@
 # Nixon Brasil
 
-Publicação independente em português sobre a vida, a Presidência e a política externa de Richard Nixon.
+Produto editorial brasileiro dedicado a preservar e apresentar, em português, a vida pública e o legado de Richard Nixon.
 
 **Site:** [nixonbrazil.page](https://nixonbrazil.page)
 
-O acervo editorial é formado por artigos em Markdown e fichas de documentos históricos. As páginas são compiladas com Astro e publicadas no GitHub Pages.
+O projeto adapta ao público brasileiro um modelo de divulgação histórica centrado em legado, documentos, educação e mídia. O acervo é formado por artigos em Markdown e fichas de documentos históricos; as páginas são compiladas com Astro e publicadas no GitHub Pages.
+
+Até existir autorização ou colaboração formal, o Nixon Brasil permanece uma iniciativa independente e não usa nome, selo ou identidade visual da Richard Nixon Foundation.
 
 ## Estrutura
 

@@ -40,6 +40,6 @@ O conceito, entretanto, desenvolvia um elemento presente na campanha: a tentativ
 
 ## O significado do retorno
 
-A eleição de 1968 demonstrou capacidade de reconstrução e disciplina organizacional. Também revelou tensões que marcariam o período seguinte: o uso político da ordem pública, a transformação do mapa partidário e a dificuldade de conciliar promessa de paz com escalada militar.
+A eleição de 1968 demonstrou capacidade de reconstrução, disciplina organizacional e leitura de um eleitorado em transformação. Nixon converteu seis anos fora de cargos públicos em presença nacional, reuniu diferentes alas republicanas e se apresentou como liderança experiente para um país em crise.
 
 A vitória esmagadora de 1972 não deve ser projetada retroativamente sobre 1968. Foram campanhas distintas, em contextos distintos. O feito de 1968 permanece relevante por outra razão: Nixon voltou de duas derrotas importantes, reorganizou sua posição dentro do Partido Republicano e venceu uma das eleições mais fragmentadas do século XX.
