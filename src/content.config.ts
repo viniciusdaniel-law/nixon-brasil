@@ -1,5 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 const artigos = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/artigos' }),
@@ -21,7 +22,7 @@ const artigos = defineCollection({
     cover: z.string().optional(),
     coverAlt: z.string().optional(),
     coverCredit: z.string().optional(),
-    sourceUrl: z.string().url().optional(),
+    sourceUrl: z.url().optional(),
     homePlacement: z.enum(['lead', 'rail', 'none']).default('none'),
     draft: z.boolean().default(true),
   }),
@@ -48,7 +49,7 @@ const documentos = defineCollection({
     category: z.enum(['Biografia', 'Presidência', 'Política externa', 'Nixon e o Brasil']),
     archive: z.string().optional(),
     reference: z.string().optional(),
-    originalUrl: z.string().url(),
+    originalUrl: z.url(),
     translationStatus: z.enum([
       'Original em inglês',
       'Tradução em preparação',

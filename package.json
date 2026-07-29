@@ -12,9 +12,9 @@
     "preview": "astro preview",
     "check:domain": "node scripts/check-domain.mjs"
   },
-  "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "astro": "^5.13.5",
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "astro": "^7.1.6",
     "typescript": "^5.9.3"
   }
 }

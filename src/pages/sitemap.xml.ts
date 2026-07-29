@@ -3,7 +3,8 @@ import { getCollection } from 'astro:content';
 export async function GET({ site }: { site: URL }) {
   const base = import.meta.env.BASE_URL;
   const staticRoutes = ['', 'biografia/', 'presidencia/', 'politica-externa/', 'brasil/', 'acervo/', 'artigos/', 'videos/', 'sobre/'];
-  const articles = await getCollection('artigos', ({ data }) => !data.draft);
+  const articles = (await getCollection('artigos', ({ data }) => !data.draft))
+    .sort((a, b) => a.id.localeCompare(b.id, 'pt-BR'));
   const urls = [
     ...staticRoutes.map((route) => new URL(`${base}${route}`, site).toString()),
     ...articles.map((article) => new URL(`${base}artigos/${article.id}/`, site).toString()),
