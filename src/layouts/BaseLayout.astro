@@ -49,6 +49,7 @@ const structuredData = type === 'article'
       inLanguage: 'pt-BR',
       publisher: { '@type': 'Organization', name: 'Nixon Brasil' },
     };
+const serializedStructuredData = JSON.stringify(structuredData).replace(/</g, '\\u003c');
 ---
 <!doctype html>
 <html lang="pt-BR">
@@ -75,7 +76,7 @@ const structuredData = type === 'article'
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
     <title>{fullTitle}</title>
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <script is:inline type="application/ld+json" set:html={serializedStructuredData} />
   </head>
   <body>
     <a class="skip" href="#conteudo">Pular para o conteúdo</a>

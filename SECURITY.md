@@ -4,7 +4,7 @@
 
 O Nixon Brasil é gerado como site estático. Não possui banco de dados público, sessão de usuário, formulário de autenticação, chave de API ou execução de código no servidor.
 
-## Segredos
+## Regras operacionais
 
 Nunca adicionar ao repositório ou ao frontend:
 
@@ -15,12 +15,12 @@ Nunca adicionar ao repositório ou ao frontend:
 - segredos OAuth;
 - dados pessoais de assinantes.
 
-Segredos futuros devem ser armazenados apenas em **Settings → Secrets and variables → Actions**.
+Segredos futuros devem ser armazenados apenas em **Settings → Secrets and variables → Actions**. Se uma credencial for exposta, revogue-a antes de remover o arquivo ou editar o histórico.
 
 ## CMS
 
 O Pages CMS autentica pelo GitHub. A capacidade de editar depende das permissões concedidas ao usuário no repositório. Visitantes do site não recebem acesso de escrita.
 
-## Relato de vulnerabilidade
+Dependências são atualizadas pelo Dependabot. O workflow de publicação executa build e auditoria de vulnerabilidades antes do deploy.
 
-Não abra uma issue pública contendo credenciais ou dados sensíveis. Use contato privado com o mantenedor do repositório.
+Não publique credenciais, dados pessoais ou detalhes exploráveis em uma issue.

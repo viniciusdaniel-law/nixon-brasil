@@ -29,8 +29,8 @@ Nem todo artigo precisa produzir os cinco formatos. A fonte disponível determin
 2. contexto: data, lugar e problema;
 3. documento: trecho curto ou reprodução;
 4. decisão: o que ocorreu;
-5. consequência: efeito imediato e limite;
-6. controvérsia: evidência contrária ou disputa de interpretação;
+5. resultado: efeito imediato e desenvolvimento posterior;
+6. contexto: o que o trecho isolado não explica;
 7. fonte: instituição, coleção, identificação e URL;
 8. chamada: link para o artigo completo.
 

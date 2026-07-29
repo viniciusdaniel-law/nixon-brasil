@@ -52,3 +52,5 @@ O comando verifica os tipos, compila todas as rotas e testa navegação, metadad
 Pull requests executam o build. Alterações incorporadas à `main` são publicadas pelo workflow [`pages.yml`](.github/workflows/pages.yml).
 
 O Nixon Brasil não possui vínculo com a Richard Nixon Foundation, a Richard Nixon Presidential Library, a NARA ou o governo dos Estados Unidos.
+
+Código e textos editoriais originais têm direitos reservados. Documentos e imagens de terceiros mantêm sua licença ou situação jurídica de origem; consulte [`LICENSE.md`](LICENSE.md).

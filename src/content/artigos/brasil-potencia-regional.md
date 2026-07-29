@@ -36,8 +36,8 @@ O governo brasileiro defendia seus próprios objetivos em temas como comércio, 
 
 Ler a documentação pela fricção ajuda a evitar duas simplificações. O Brasil não era irrelevante para a estratégia dos Estados Unidos, mas também não ocupava uma posição equivalente à dos aliados centrais da Europa e da Ásia. A noção de potência regional descrevia peso e utilidade; não significava igualdade.
 
-## Contexto brasileiro
+## O lugar do Brasil nos documentos
 
-A relação se desenvolveu sob o governo autoritário de Emílio Garrastazu Médici. Reconhecer o peso estratégico atribuído ao Brasil não exige transformar esse regime em modelo nem tratar cooperação externa como aprovação de sua política interna.
+As conversas ocorreram durante o governo Médici, entre 1969 e 1974. Nos memorandos americanos, o Brasil aparece como interlocutor regional, parceiro em temas materiais e governo disposto a preservar margem própria de ação.
 
-Para o leitor brasileiro, o dado central dos memorandos é a posição reservada ao país: Washington o tratava como interlocutor regional, negociava interesses materiais e reconhecia sua margem de ação. O dossiê existe para tornar essa documentação acessível em português.
+O dossiê torna essa documentação acessível em português e permite acompanhar a relação bilateral pelos registros produzidos à época.

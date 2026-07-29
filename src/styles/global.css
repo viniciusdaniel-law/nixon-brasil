@@ -457,8 +457,6 @@ select:focus-visible {
   line-height: 1.06;
 }
 .videos-status > p { color: var(--muted); font-size: 1.12rem; }
-.technical-note { margin-top: 34px; font-size: .95rem !important; }
-
 .site-footer {
   background: #05162c;
   color: white;
