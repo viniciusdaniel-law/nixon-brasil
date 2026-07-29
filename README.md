@@ -22,7 +22,7 @@ public/uploads/           imagens enviadas pelo CMS
 
 ## Edição
 
-O uso cotidiano não exige alterar código. O [Pages CMS](https://app.pagescms.org/) edita os artigos e documentos diretamente no repositório. Consulte:
+O uso cotidiano não exige alterar código. O [Pages CMS](https://app.pagescms.org/) edita artigos e documentos na branch `editorial`; a publicação só ocorre depois de uma pull request aprovada para `main`. Consulte:
 
 - [`docs/CMS.md`](docs/CMS.md) — publicar e organizar conteúdo;
 - [`docs/GUIA-DE-EDICAO.md`](docs/GUIA-DE-EDICAO.md) — revisão, teste e manutenção;
