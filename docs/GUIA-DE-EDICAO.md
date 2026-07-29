@@ -4,16 +4,14 @@ Este documento serve para operar o Nixon Brasil, alterar o código em Astro e re
 
 ## 1. Mapa do sistema
 
-O projeto tem dois fluxos.
+O projeto tem três fluxos.
 
-### Publicação
+### Alteração de código ou estrutura
 
 ```text
-Edição no Pages CMS ou no GitHub
+branch de trabalho
         ↓
-arquivo Markdown ou código no repositório
-        ↓
-pull request
+commit e pull request
         ↓
 GitHub Actions executa npm run build
         ↓
@@ -23,6 +21,22 @@ Astro gera a pasta dist
         ↓
 GitHub Pages publica o resultado
 ```
+
+### Conteúdo pelo Pages CMS
+
+```text
+edição no painel, com a branch main selecionada
+        ↓
+Pages CMS grava um commit diretamente na main
+        ↓
+GitHub Actions executa npm run build
+        ↓
+Astro gera a pasta dist
+        ↓
+GitHub Pages publica o resultado
+```
+
+O Pages CMS não abre uma pull request automaticamente. Para submeter conteúdo à revisão por PR, selecione uma branch editorial separada no painel e abra a pull request no GitHub.
 
 ### Domínio
 
@@ -354,7 +368,7 @@ Use o Pages CMS:
 9. desative **Rascunho**;
 10. salve.
 
-O painel grava um arquivo Markdown. O conteúdo não fica preso ao CMS.
+O painel grava um arquivo Markdown e um commit na branch selecionada. Na `main`, esse commit aciona a publicação. Um artigo com **Rascunho** ativo continua no repositório, mas não entra no site; alterações em conteúdo já publicado podem chegar ao site assim que o workflow terminar. O conteúdo não fica preso ao CMS.
 
 ### Publicar artigo pelo editor
 
@@ -520,13 +534,19 @@ Não transforme o script em teste de redação ou preferência estética.
 - push em `main`: compila, testa e publica;
 - execução manual: recompila e publica.
 
-O fluxo normal é:
+Para código, layout, schema ou automação, o fluxo normal é:
 
 ```text
 branch → commit → pull request → CI verde → merge → deploy
 ```
 
-Evite editar diretamente a `main` quando a mudança altera layout, componentes, schema ou automação.
+Para conteúdo salvo pelo Pages CMS com a `main` selecionada:
+
+```text
+edição → commit editorial na main → build → deploy
+```
+
+Não use a `main` para experimentar layout, componentes, schema ou automação.
 
 ### Pages CMS
 
