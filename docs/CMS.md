@@ -4,9 +4,9 @@
 
 1. Entre em [app.pagescms.org](https://app.pagescms.org/) com a conta do GitHub.
 2. Autorize apenas o repositório `viniciusdaniel-law/nixon-brasil`.
-3. Selecione a branch `main`.
+3. Selecione a branch `editorial` — não edite `main` diretamente.
 
-O painel lê `.pages.yml` e exibe duas coleções: **Artigos** e **Documentos do acervo**.
+O painel lê `.pages.yml` nessa branch e exibe duas coleções: **Artigos** e **Documentos do acervo**. A branch `editorial` funciona como área de trabalho; `main` é a produção publicada.
 
 ## Publicar um artigo
 
@@ -20,8 +20,10 @@ O painel lê `.pages.yml` e exibe duas coleções: **Artigos** e **Documentos do
 5. Escreva e revise o texto.
 6. Mantenha **Rascunho** ativo até a revisão final.
 7. Para publicar, desative **Rascunho** e salve.
+8. Abra [a comparação `editorial` → `main`](https://github.com/viniciusdaniel-law/nixon-brasil/compare/main...editorial?expand=1), crie a pull request e aguarde o check `build`.
+9. Revise a prévia e faça o merge somente quando o check estiver aprovado.
 
-O CMS cria ou atualiza um arquivo em `src/content/artigos/`. A publicação começa quando a alteração chega à branch `main`.
+O CMS cria ou atualiza um arquivo em `src/content/artigos/`. Salvar no CMS não publica o site; a publicação começa somente quando a pull request chega à branch `main`.
 
 ## Cadastrar um documento
 
@@ -51,4 +53,4 @@ Crédito não substitui autorização de uso.
 
 ## Correção e retirada
 
-Para uma correção simples, edite a entrada e preencha **Última atualização**. Para retirar um artigo sem apagá-lo, ative **Rascunho**. O histórico anterior permanece no GitHub.
+Para uma correção simples, edite a entrada e preencha **Última atualização**. Para retirar um artigo sem apagá-lo, ative **Rascunho**. Salve na branch `editorial` e use a mesma pull request de revisão. O histórico anterior permanece no GitHub.
