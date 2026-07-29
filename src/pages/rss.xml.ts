@@ -10,7 +10,10 @@ const escapeXml = (value: string) => value
 export async function GET({ site }: { site: URL }) {
   const base = import.meta.env.BASE_URL;
   const articles = (await getCollection('artigos', ({ data }) => !data.draft))
-    .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+    .sort((a, b) => (
+      b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
+      || a.id.localeCompare(b.id, 'pt-BR')
+    ));
 
   const items = articles.map((article) => {
     const link = new URL(`${base}artigos/${article.id}/`, site).toString();
