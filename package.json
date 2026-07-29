@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build && node scripts/verify-site.mjs",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "check:domain": "node scripts/check-domain.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

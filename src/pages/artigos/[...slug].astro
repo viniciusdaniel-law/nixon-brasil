@@ -17,7 +17,15 @@ const cover = rawCover
 const words = article.body?.split(/\s+/).filter(Boolean).length ?? 0;
 const minutes = Math.max(1, Math.round(words / 220));
 ---
-<BaseLayout title={article.data.title} description={article.data.description} image={cover} type="article">
+<BaseLayout
+  title={article.data.title}
+  description={article.data.description}
+  image={cover}
+  type="article"
+  publishedAt={article.data.publishedAt}
+  updatedAt={article.data.updatedAt}
+  author={article.data.author}
+>
   <article>
     <header class="article-header">
       <p class="kicker">{article.data.category}</p>
@@ -39,9 +47,9 @@ const minutes = Math.max(1, Math.round(words / 220));
       <Content />
       {article.data.sourceUrl && (
         <aside class="article-sources">
-          <h2>Fonte de partida</h2>
+          <h2>Referência principal</h2>
           <ul>
-            <li><a href={article.data.sourceUrl} target="_blank" rel="noreferrer">Documento ou coleção principal ↗</a></li>
+            <li><a href={article.data.sourceUrl} target="_blank" rel="noreferrer">Consultar documento ou coleção ↗</a></li>
           </ul>
         </aside>
       )}

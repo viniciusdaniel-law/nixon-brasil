@@ -1,40 +1,49 @@
 ---
-title: "SALT I e o Tratado ABM: a détente como força, não como rendição"
-subtitle: "Limitar mísseis não foi fraqueza. Foi impor regras a uma corrida que, sem teto, consumiria a estratégia americana."
-description: "Uma defesa da détente nuclear de Nixon: SALT I, Tratado ABM e o uso da negociação como instrumento de poder, com links para o arquivo oficial."
+title: "SALT I e o Tratado ABM: os limites negociados da détente"
+subtitle: "Os acordos de 1972 impuseram regras a partes da competição nuclear sem encerrar a corrida armamentista."
+description: "SALT I, Tratado ABM e o uso da negociação nuclear pela administração Nixon, com seus resultados e limitações."
 publishedAt: 2026-07-24
+updatedAt: 2026-07-28
 author: "Nixon Brasil"
 category: "Política externa"
 cover: "https://commons.wikimedia.org/wiki/Special:Redirect/file/President_Richard_Nixon_and_Leonid_Brezhnev_signing_the_SALT_I_agreement.jpg"
 coverAlt: "Nixon e Brezhnev na assinatura dos acordos SALT I, 1972"
 coverCredit: "White House Photo Office / NARA · domínio público (via Wikimedia)"
 sourceUrl: "https://history.state.gov/milestones/1969-1976/salt"
-featured: false
+homePlacement: "rail"
 draft: false
 ---
 
-Há uma caricatura fácil da détente: o americano “mole” que assina papel com o soviético enquanto o mundo arde. A caricatura sobrevive porque é útil a quem prefere moralismo a arquivo. A administração Nixon fez o oposto: **usou a negociação para disciplinar a corrida nuclear** e liberar margem política e orçamentária para outros tabuleiros — inclusive a China.
+Em 26 de maio de 1972, Richard Nixon e Leonid Brezhnev assinaram em Moscou dois instrumentos distintos: o Tratado sobre Mísseis Antibalísticos e o Acordo Provisório sobre certas armas ofensivas estratégicas. Juntos, ficaram associados ao primeiro ciclo das *Strategic Arms Limitation Talks*, o SALT I.
 
-## O que SALT I era — e o que não era
+Os acordos não desarmaram Estados Unidos e União Soviética. Seu objetivo era mais restrito: impor previsibilidade a áreas específicas da competição nuclear e reduzir incentivos para uma expansão ilimitada de sistemas defensivos e lançadores estratégicos.
 
-Os acordos de 1972, no marco do [Strategic Arms Limitation Talks](https://history.state.gov/milestones/1969-1976/salt), não desarmam os Estados Unidos. Estabelecem **limites e verificações** num ambiente em que a alternativa era escalada aberta e custo estratégico cego. O [Tratado ABM](https://history.state.gov/milestones/1969-1976/salt) ataca a lógica de defesa antimísseis ilimitada que, na prática, empurrava ambos os lados a ofensivas ainda maiores.
+## O problema dos sistemas antibalísticos
 
-Quem chama isso de capitulação deveria apresentar o plano B sério: corrida sem teto, com orçamento e doutrina reféns do pior cenário todos os anos. Nixon recusou esse vício.
+Uma defesa capaz de neutralizar grande parte do arsenal adversário poderia parecer estabilizadora. Na lógica da dissuasão, porém, ela criava pressão para que o outro lado ampliasse suas forças ofensivas e preservasse a capacidade de retaliação.
 
-## Détente e triângulo
+O [Tratado ABM](https://history.state.gov/milestones/1969-1976/salt) limitou inicialmente cada país a dois complexos de defesa antimíssil: um para proteger a capital e outro para proteger uma área de lançadores intercontinentais. Um protocolo de 1974 reduziu o limite a um complexo por país. A intenção era impedir que a competição defensiva anulasse a vulnerabilidade recíproca sobre a qual repousava a dissuasão.
 
-A détente com Moscou e a abertura a Pequim não são capítulos separados. São a mesma mente estratégica: **multiplicar opções**. Com a China no jogo, a União Soviética negocia sob pressão diferente. Com limites nucleares, a competição migra para terrenos onde os EUA podiam competir com vantagem relativa. Isso é realismo clássico, não “entrega da Guerra Fria”.
+## O que o Acordo Provisório limitou
 
-## Moscou, 1972
+O acordo ofensivo congelou por cinco anos o número de lançadores de mísseis balísticos intercontinentais e estabeleceu limites para lançadores em submarinos. As regras preservavam diferenças entre os arsenais e não impunham um teto abrangente a ogivas ou a veículos de reentrada múltipla, os MIRVs.
 
-As imagens de Nixon e Brezhnev assinando papéis não são propaganda fofa. São teatro de Estado — e teatro de Estado é ferramenta. O presidente americano que visita Pequim e assina SALT no mesmo arco histórico está dizendo ao sistema internacional: **Washington define ritmo**.
+Essa lacuna foi importante. A quantidade e a capacidade destrutiva dos armamentos continuaram a crescer mesmo sob limites para certos lançadores. SALT I administrou parte da corrida; não resolveu sua dinâmica tecnológica.
+
+## Verificação sem inspeção permanente
+
+Os acordos reconheceram o uso de “meios técnicos nacionais” de verificação, expressão que abrangia satélites e outras formas de observação. Cada lado se comprometeu a não interferir nesses meios e a não empregar ocultação deliberada que impedisse a verificação.
+
+O arranjo permitiu controle sem depender de inspeções presenciais permanentes. Também mostrou que negociação com um adversário podia se apoiar em capacidade técnica e interesse recíproco, não em confiança política.
+
+## Détente e estratégia
+
+SALT I integrou uma política mais ampla de détente com Moscou. A abertura à China aumentava as opções diplomáticas de Washington, enquanto o diálogo nuclear procurava reduzir um risco específico da relação soviético-americana. Os dois processos se reforçavam, mas não eram uma única operação.
+
+Para Nixon, negociar limites era compatível com manter força militar e competição geopolítica. Essa combinação distinguia détente de reconciliação ideológica. Os acordos coexistiram com conflitos indiretos, modernização de arsenais e profundas diferenças sobre a ordem internacional.
 
 ## Legado
 
-A arquitetura de controle de armamentos do final do século XX não começa em 1972 do zero, mas **acelera e oficializa** um método: negociar com o adversário sem confundi-lo com amigo. Décadas de tratados posteriores dialogam com essa gramática, mesmo quando a rompem.
+SALT I estabeleceu linguagem, procedimentos e expectativas que influenciaram negociações posteriores. Seus limites são tão importantes quanto seus resultados: não conteve os MIRVs, aceitou assimetrias e teve caráter temporário no campo ofensivo.
 
-## Fechamento
-
-Este site não pede que se ame a União Soviética de Brezhnev. Pede que se respeite a inteligência de quem sentou à mesa com ela e saiu com regras, não com ilusões. SALT I e o ABM são peças de uma Presidência que pensava em **décadas**, não em ciclos de manchete.
-
-Nixon não “amou” a paz abstrata. Usou a paz negociada como instrumento de poder americano. Essa é a apologia. O [marco histórico do Departamento de Estado](https://history.state.gov/milestones/1969-1976/salt) está aí para quem prefere fonte a charge.
+O principal êxito foi demonstrar que as duas superpotências podiam codificar restrições verificáveis no centro de sua rivalidade. A administração Nixon não encerrou a corrida nuclear, mas substituiu uma parte da competição sem regras por uma estrutura negociada. Em 1972, isso já representava uma mudança estratégica substancial.

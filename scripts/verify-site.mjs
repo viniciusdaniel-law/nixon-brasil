@@ -1,5 +1,6 @@
-import { access, readFile } from 'node:fs/promises';
+import { access, readFile, readdir } from 'node:fs/promises';
 import { constants } from 'node:fs';
+import { extname, join } from 'node:path';
 
 const requiredRoutes = [
   'dist/index.html',
@@ -12,76 +13,93 @@ const requiredRoutes = [
   'dist/videos/index.html',
   'dist/sobre/index.html',
   'dist/404.html',
+  'dist/rss.xml',
+  'dist/sitemap.xml',
+  'dist/robots.txt',
 ];
 
 for (const route of requiredRoutes) {
   await access(route, constants.R_OK);
 }
 
-const [home, recoveryCss, motionCss, motionScript, source, motionLoader] = await Promise.all([
-  readFile('dist/index.html', 'utf8'),
-  readFile('src/styles/home-recovery.css', 'utf8'),
-  readFile('src/styles/motion.css', 'utf8'),
-  readFile('public/scripts/home-motion.js', 'utf8'),
+async function filesIn(directory) {
+  const entries = await readdir(directory, { withFileTypes: true });
+  const nested = await Promise.all(entries.map((entry) => {
+    const path = join(directory, entry.name);
+    return entry.isDirectory() ? filesIn(path) : [path];
+  }));
+  return nested.flat();
+}
+
+const [header, config, cms, pageSource, articleNames] = await Promise.all([
+  readFile('src/components/Header.astro', 'utf8'),
+  readFile('astro.config.mjs', 'utf8'),
+  readFile('.pages.yml', 'utf8'),
   readFile('src/pages/index.astro', 'utf8'),
-  readFile('src/components/HomeMotion.astro', 'utf8'),
+  readdir('src/content/artigos'),
 ]);
 
-const forbiddenCopy = ['Sem desculpas', 'Arquivo · ensaio · apologia', 'quote-band', 'class="ticker"'];
-for (const fragment of forbiddenCopy) {
-  if (home.includes(fragment) || source.includes(fragment)) {
-    throw new Error(`Forbidden homepage fragment returned: ${fragment}`);
+if (!config.includes("site: 'https://nixonbrazil.page'")) {
+  throw new Error('O domínio canônico não está definido no Astro.');
+}
+
+if (!header.includes('<details class="nav-menu">') || header.includes('nav-open')) {
+  throw new Error('O menu deve funcionar sem JavaScript e sem bloquear a página.');
+}
+
+if (!cms.includes('name: homePlacement') || !pageSource.includes("homePlacement === 'lead'")) {
+  throw new Error('A posição dos artigos na página inicial não está ligada ao CMS.');
+}
+
+const articleSources = await Promise.all(
+  articleNames
+    .filter((name) => extname(name) === '.md')
+    .map((name) => readFile(join('src/content/artigos', name), 'utf8')),
+);
+
+const leadCount = articleSources.filter((source) => source.includes('homePlacement: "lead"')).length;
+if (leadCount !== 1) {
+  throw new Error(`A página inicial precisa de uma matéria principal; foram encontradas ${leadCount}.`);
+}
+
+const generatedFiles = await filesIn('dist');
+const htmlFiles = generatedFiles.filter((file) => extname(file) === '.html');
+
+if (htmlFiles.length !== 15) {
+  throw new Error(`O build deveria gerar 15 páginas HTML; gerou ${htmlFiles.length}.`);
+}
+
+for (const file of htmlFiles) {
+  const html = await readFile(file, 'utf8');
+
+  if (!/<title>[^<]+<\/title>/.test(html)) {
+    throw new Error(`Página sem título: ${file}`);
+  }
+  if (!/<meta name="description" content="[^"]+">/.test(html)) {
+    throw new Error(`Página sem descrição: ${file}`);
+  }
+  if (!/<link rel="canonical" href="https:\/\/nixonbrazil\.page\//.test(html)) {
+    throw new Error(`URL canônica incorreta: ${file}`);
+  }
+  if (html.includes('viniciusdaniel-law.github.io/nixon-brasil')) {
+    throw new Error(`Endereço antigo encontrado: ${file}`);
+  }
+
+  for (const match of html.matchAll(/href="([^"]+)"/g)) {
+    const href = match[1];
+    if (!href.startsWith('/') || href.startsWith('//')) continue;
+
+    const pathname = href.split(/[?#]/, 1)[0];
+    const target = pathname === '/'
+      ? 'dist/index.html'
+      : pathname.endsWith('/')
+        ? join('dist', pathname, 'index.html')
+        : join('dist', pathname);
+
+    await access(target, constants.R_OK).catch(() => {
+      throw new Error(`Link interno sem destino em ${file}: ${href}`);
+    });
   }
 }
 
-const requiredSourceFragments = [
-  'shell-wide',
-  'editorial-grid',
-  'compact-list',
-  'hero-note',
-  'data-motion="hero"',
-  'data-motion="lead-story"',
-  'data-motion="index-row"',
-  '<HomeMotion />',
-];
-for (const fragment of requiredSourceFragments) {
-  if (!source.includes(fragment)) {
-    throw new Error(`Homepage is missing required structure: ${fragment}`);
-  }
-}
-
-if (!/\.hero-v2\s*\{[^}]*flex-direction:\s*column/s.test(recoveryCss)) {
-  throw new Error('Hero regression: .hero-v2 must remain a vertical flex container.');
-}
-
-if (!motionCss.includes('@media (prefers-reduced-motion: reduce)')) {
-  throw new Error('Motion CSS must provide a reduced-motion fallback.');
-}
-
-if (!motionScript.includes("matchMedia('(prefers-reduced-motion: reduce)')")) {
-  throw new Error('Motion runtime must respect prefers-reduced-motion.');
-}
-
-const pinnedMotionAssets = [
-  'gsap@3.15.0/dist/gsap.min.js',
-  'gsap@3.15.0/dist/ScrollTrigger.min.js',
-  'scripts/home-motion.js',
-];
-for (const asset of pinnedMotionAssets) {
-  if (!motionLoader.includes(asset) || !home.includes(asset)) {
-    throw new Error(`Generated homepage is missing pinned motion asset: ${asset}`);
-  }
-}
-
-const forbiddenMotionFeatures = ['ScrollSmoother', 'scroll-behavior: smooth !important', 'color-burn', 'mix-blend-mode'];
-for (const fragment of forbiddenMotionFeatures) {
-  if (motionScript.includes(fragment) || motionCss.includes(fragment)) {
-    throw new Error(`Motion foundation includes a forbidden global effect: ${fragment}`);
-  }
-}
-
-if (!home.includes('Publicação histórica') || !home.includes('Nixon Brasil')) {
-  throw new Error('Generated homepage is missing institutional identity.');
-}
-
-console.log(`Verified ${requiredRoutes.length} routes, homepage recovery, and editorial motion invariants.`);
+console.log(`Site verificado: ${htmlFiles.length} páginas, domínio, navegação, metadados e seleção editorial.`);

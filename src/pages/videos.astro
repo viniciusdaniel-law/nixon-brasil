@@ -8,19 +8,19 @@ const base = import.meta.env.BASE_URL;
     <div class="shell">
       <p class="kicker light">Em preparação</p>
       <h1>Vídeos em português</h1>
-      <p>Ainda não publicamos cortes legendados. Quando saírem, cada um virá com fonte, data, crédito e legenda revisada — sem “conteúdo de IA” solto no ar.</p>
+      <p>A seção reunirá discursos, entrevistas e registros de arquivo com fonte, data, crédito e legendas revisadas.</p>
     </div>
   </section>
   <section class="section white">
     <div class="shell videos-status">
       <p class="kicker">O que virá</p>
-      <h2 style="font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; margin: 0 0 18px;">Arquivo falado, em português.</h2>
-      <p>Discurso, entrevista e trecho de arquivo, com o original identificado e o comentário editorial separado da fala de Nixon. Enquanto isso, o texto e o acervo já estão no ar.</p>
-      <div class="actions" style="margin-top: 28px;">
+      <h2>Arquivo falado, em português.</h2>
+      <p>Cada publicação identificará o original e manterá o comentário editorial separado da fala traduzida. Enquanto a coleção é preparada, os artigos e documentos permanecem disponíveis.</p>
+      <div class="actions">
         <a class="btn dark" href={`${base}artigos/`}>Ler artigos</a>
-        <a class="btn" href={`${base}acervo/`} style="border-color: var(--navy);">Ver acervo</a>
+        <a class="btn light" href={`${base}acervo/`}>Ver acervo</a>
       </div>
-      <p style="margin-top: 36px; font-size: .95rem;">Notas técnicas de produção (transcrição, legenda, direitos) ficam em <a href="https://github.com/viniciusdaniel-law/nixon-brasil/blob/main/docs/TRADUCAO-DE-VIDEO.md" target="_blank" rel="noreferrer">docs/TRADUCAO-DE-VIDEO.md ↗</a>, não na página pública.</p>
+      <p class="technical-note">O método de transcrição, tradução e crédito está documentado no <a href="https://github.com/viniciusdaniel-law/nixon-brasil/blob/main/docs/TRADUCAO-DE-VIDEO.md" target="_blank" rel="noreferrer">guia de vídeo ↗</a>.</p>
     </div>
   </section>
 </BaseLayout>

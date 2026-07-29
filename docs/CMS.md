@@ -1,71 +1,54 @@
-# Painel editorial — Pages CMS
+# Pages CMS
 
 ## Acesso
 
-1. Abra `https://app.pagescms.org/`.
-2. Entre com a conta GitHub proprietária do repositório.
-3. Autorize acesso somente a `viniciusdaniel-law/nixon-brasil`.
-4. Selecione o repositório e a branch `main`.
+1. Entre em [app.pagescms.org](https://app.pagescms.org/) com a conta do GitHub.
+2. Autorize apenas o repositório `viniciusdaniel-law/nixon-brasil`.
+3. Selecione a branch `main`.
 
-O Pages CMS lê o arquivo `.pages.yml` e oferece duas coleções:
+O painel lê `.pages.yml` e exibe duas coleções: **Artigos** e **Documentos do acervo**.
 
-- **Artigos**
-- **Documentos do acervo**
-
-## Publicar artigo
+## Publicar um artigo
 
 1. Abra **Artigos → New entry**.
-2. Preencha título, resumo, data, autor e categoria.
-3. Adicione imagem, texto alternativo e crédito.
-4. Escreva o texto no editor.
-5. Deixe `Rascunho` ativo enquanto revisa.
-6. Para publicar, desative `Rascunho` e salve.
+2. Preencha título, subtítulo, resumo, data, autor e categoria.
+3. Escolha a posição na página inicial:
+   - `lead`: matéria principal; mantenha apenas um artigo nessa posição;
+   - `rail`: lista lateral, limitada aos quatro artigos mais recentes;
+   - `none`: não aparece na seleção da página inicial.
+4. Adicione imagem, texto alternativo e crédito.
+5. Escreva e revise o texto.
+6. Mantenha **Rascunho** ativo até a revisão final.
+7. Para publicar, desative **Rascunho** e salve.
 
-A alteração vira um arquivo Markdown em `src/content/artigos/`. O GitHub Actions recompila o portal e publica a nova versão.
+O CMS cria ou atualiza um arquivo em `src/content/artigos/`. A publicação começa quando a alteração chega à branch `main`.
 
-## Destacar na página inicial
+## Cadastrar um documento
 
-Ative **Destacar na página inicial**. A home exibe até três artigos destacados, ordenados pela data de publicação.
+Registre:
 
-## Adicionar documento ao acervo
-
-Preencha:
-
-- título editorial;
-- título original;
-- data;
-- formato;
+- título editorial e título original;
+- data e formato;
 - tema;
-- arquivo de origem;
+- instituição ou arquivo de origem;
 - referência oficial;
 - URL do original;
 - situação da tradução;
 - nota documental.
 
-Não inventar códigos de arquivo. Use somente referências reais fornecidas pela instituição de custódia.
+Não estime códigos de caixa, pasta ou documento. Se a referência não estiver disponível na instituição de custódia, deixe o campo vazio.
 
 ## Imagens
 
-Uploads entram em `public/uploads/`. Antes de publicar, registrar:
+Uploads são gravados em `public/uploads/`. Antes de publicar, confirme:
 
-- descrição visual adequada;
+- descrição visual;
 - fotógrafo ou órgão produtor;
-- coleção;
-- identificador, quando houver;
+- coleção e identificador, quando disponíveis;
 - licença ou situação de domínio público.
 
-## Domínio próprio
+Crédito não substitui autorização de uso.
 
-Depois de configurar o domínio no GitHub Pages, crie uma variável de repositório:
+## Correção e retirada
 
-`Settings → Secrets and variables → Actions → Variables → New repository variable`
-
-Nome:
-
-`CUSTOM_DOMAIN`
-
-Valor de exemplo:
-
-`nixonbrasil.org`
-
-O build passa a usar a raiz `/` em vez de `/nixon-brasil/`.
+Para uma correção simples, edite a entrada e preencha **Última atualização**. Para retirar um artigo sem apagá-lo, ative **Rascunho**. O histórico anterior permanece no GitHub.

@@ -61,10 +61,15 @@ content:
       - name: sourceUrl
         label: Fonte primária principal
         type: string
-      - name: featured
-        label: Destacar na página inicial
-        type: boolean
-        default: false
+      - name: homePlacement
+        label: Posição na página inicial
+        type: select
+        default: none
+        options:
+          values:
+            - lead
+            - rail
+            - none
       - name: draft
         label: Rascunho
         type: boolean
@@ -104,7 +109,10 @@ content:
           values:
             - Memorando
             - Discurso
+            - Comunicado
             - Tratado
+            - Coleção
+            - Página institucional
             - Fotografia
             - Gravação
             - Vídeo
@@ -142,3 +150,11 @@ content:
       - name: body
         label: Comentário ou tradução
         type: rich-text
+
+settings:
+  commit:
+    templates:
+      create: "Adicionar {path}"
+      update: "Atualizar {path}"
+      delete: "Retirar {path}"
+      rename: "Renomear {oldPath} para {newPath}"
