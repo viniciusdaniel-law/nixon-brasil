@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { imageAtWidth, imageSrcset } from '../../lib/images';
 
 export async function getStaticPaths() {
   const articles = await getCollection('artigos', ({ data }) => !data.draft);
@@ -39,7 +40,7 @@ const minutes = Math.max(1, Math.round(words / 220));
     </header>
     {cover && (
       <figure class="article-cover">
-        <img src={cover} alt={article.data.coverAlt ?? ''} width="1240" height="700" loading="eager" decoding="async" />
+        <img src={imageAtWidth(cover, 1600)} srcset={imageSrcset(cover, [640, 960, 1280, 1600])} sizes="(max-width: 1220px) 100vw, 1220px" alt={article.data.coverAlt ?? ''} width="1240" height="700" loading="eager" decoding="async" />
         {article.data.coverCredit && <figcaption>{article.data.coverCredit}</figcaption>}
       </figure>
     )}

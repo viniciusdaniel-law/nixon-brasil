@@ -57,6 +57,7 @@ select:focus-visible {
   backdrop-filter: blur(10px);
 }
 .nav-row {
+  position: relative;
   display: flex;
   min-height: 78px;
   align-items: center;
@@ -83,7 +84,10 @@ select:focus-visible {
   letter-spacing: .17em;
   text-transform: uppercase;
 }
-.nav-menu { margin-left: auto; }
+.nav-menu {
+  display: none;
+  margin-left: auto;
+}
 .nav-menu summary {
   display: none;
   border: 1px solid var(--navy);
@@ -507,13 +511,19 @@ select:focus-visible {
 
 @media (max-width: 1100px) {
   :root { --shell: calc(100% - 32px); }
-  .nav-menu summary { display: block; }
-  .main-nav {
+  .desktop-nav { display: none; }
+  .nav-menu { display: block; }
+  .nav-menu summary {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+  }
+  .mobile-nav {
     display: none;
     position: absolute;
     top: 100%;
-    right: 16px;
-    left: 16px;
+    right: 0;
+    left: 0;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0;
     border: 1px solid var(--line);
@@ -521,8 +531,8 @@ select:focus-visible {
     box-shadow: 0 14px 32px rgba(10, 29, 54, .12);
     padding: 8px 18px 16px;
   }
-  .nav-menu[open] .main-nav { display: grid; }
-  .main-nav a {
+  .nav-menu[open] .mobile-nav { display: grid; }
+  .mobile-nav a {
     border-bottom: 1px solid var(--line);
     padding: 13px 8px;
     white-space: normal;
@@ -546,11 +556,7 @@ select:focus-visible {
   .nav-row { min-height: 68px; }
   .wordmark strong { font-size: 1.13rem; letter-spacing: .12em; }
   .wordmark span { font-size: .48rem; }
-  .main-nav {
-    right: 12px;
-    left: 12px;
-    grid-template-columns: 1fr;
-  }
+  .mobile-nav { grid-template-columns: 1fr; }
   .page-hero { padding: 50px 0 42px; }
   .page-hero h1 { font-size: clamp(2.5rem, 12vw, 3.5rem); }
   .page-hero p { font-size: 1.04rem; }
@@ -575,6 +581,11 @@ select:focus-visible {
   .article-body { padding-bottom: 68px; font-size: 1.05rem; }
   .btn { width: 100%; }
   .footer-bottom { flex-direction: column; }
+}
+
+@media (max-width: 460px) {
+  .nav-row { min-height: 62px; }
+  .wordmark span { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

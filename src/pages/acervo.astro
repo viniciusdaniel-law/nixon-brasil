@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const docs = (await getCollection('documentos')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const base = import.meta.env.BASE_URL;
 ---
 <BaseLayout title="Acervo" description="Documentos, discursos, fotografias, gravações e leis relacionados à vida e à Presidência de Richard Nixon.">
   <section class="page-hero light"><div class="shell"><p class="kicker">Fontes primárias</p><h1>Acervo</h1><p>Registros selecionados com referência oficial, arquivo de origem, situação da tradução e acesso ao documento original.</p></div></section>
@@ -22,24 +23,5 @@ const docs = (await getCollection('documentos')).sort((a, b) => b.data.date.valu
     </div>
     <p id="archive-empty" hidden>Nenhum documento corresponde aos filtros.</p>
   </div></section>
-  <script is:inline>
-    const search = document.querySelector('#archive-search');
-    const filter = document.querySelector('#archive-filter');
-    const rows = [...document.querySelectorAll('.archive-row')];
-    const empty = document.querySelector('#archive-empty');
-    const update = () => {
-      const query = (search?.value || '').trim().toLowerCase();
-      const category = filter?.value || '';
-      let visible = 0;
-      rows.forEach((row) => {
-        const matchText = !query || row.dataset.search.includes(query);
-        const matchCategory = !category || row.dataset.category === category;
-        row.hidden = !(matchText && matchCategory);
-        if (!row.hidden) visible++;
-      });
-      empty.hidden = visible > 0;
-    };
-    search?.addEventListener('input', update);
-    filter?.addEventListener('change', update);
-  </script>
+  <script is:inline src={`${base}scripts/acervo.js`} defer></script>
 </BaseLayout>

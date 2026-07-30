@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { imageAtWidth, imageSrcset } from '../lib/images';
 import '../styles/home.css';
 
 const base = import.meta.env.BASE_URL;
@@ -14,6 +15,7 @@ const lead = articles.find((article) => article.data.homePlacement === 'lead') ?
 const rail = articles
   .filter((article) => article.id !== lead?.id && article.data.homePlacement === 'rail')
   .slice(0, 4);
+const heroImage = 'https://commons.wikimedia.org/wiki/Special:Redirect/file/NIXONcampaigns.jpg';
 
 function coverOf(article: (typeof articles)[number]) {
   const raw = article.data.cover ?? '';
@@ -28,7 +30,9 @@ function coverOf(article: (typeof articles)[number]) {
   <section class="hero">
     <img
       class="hero-media"
-      src="https://commons.wikimedia.org/wiki/Special:Redirect/file/NIXONcampaigns.jpg"
+      src={imageAtWidth(heroImage, 1600)}
+      srcset={imageSrcset(heroImage, [640, 960, 1280, 1600])}
+      sizes="100vw"
       alt="Richard Nixon em campanha diante de uma multidão em 1968"
       width="1600"
       height="900"
@@ -40,18 +44,17 @@ function coverOf(article: (typeof articles)[number]) {
         <p class="kicker light">1913 — 1994 · 37º presidente dos Estados Unidos</p>
         <h1>O legado de Richard Nixon, em português.</h1>
         <p class="hero-lead">
-          Presidência, diplomacia, reformas, discursos e documentos para uma nova
-          geração de leitores brasileiros.
+          Artigos e fontes primárias sobre Presidência, diplomacia, reformas e
+          relações com o Brasil.
         </p>
         <div class="actions">
-          <a class="btn primary" href={`${base}presidencia/`}>Conhecer o legado</a>
-          <a class="btn ghost" href={`${base}acervo/`}>Explorar o acervo</a>
+          <a class="btn primary" href={`${base}presidencia/`}>Presidência</a>
+          <a class="btn ghost" href={`${base}acervo/`}>Acervo</a>
         </div>
       </div>
     </div>
     <div class="hero-note">
       <div class="shell">
-        <span>Fontes principais: Nixon Library / NARA · FRUS · American Presidency Project</span>
         <span>Fotografia: Ollie Atkins / NARA · domínio público</span>
       </div>
     </div>
@@ -68,7 +71,7 @@ function coverOf(article: (typeof articles)[number]) {
         <div class="editorial-grid">
           <a class="lead-story" href={`${base}artigos/${lead.id}/`}>
             {coverOf(lead)
-              ? <img src={coverOf(lead)} alt={lead.data.coverAlt ?? ''} width="1200" height="675" loading="eager" decoding="async" />
+              ? <img src={imageAtWidth(coverOf(lead), 1280)} srcset={imageSrcset(coverOf(lead), [640, 960, 1280])} sizes="(max-width: 900px) calc(100vw - 24px), 65vw" alt={lead.data.coverAlt ?? ''} width="1200" height="675" loading="lazy" decoding="async" />
               : <div class="card-cover-fallback lead-fallback" aria-hidden="true">{lead.data.category}</div>}
             <span class="card-meta">{lead.data.category} · {lead.data.publishedAt.toLocaleDateString('pt-BR')}</span>
             <h3>{lead.data.title}</h3>
@@ -94,7 +97,7 @@ function coverOf(article: (typeof articles)[number]) {
   <section class="section home-index-section">
     <div class="shell">
       <div class="editorial-head">
-        <h2>Explore o legado</h2>
+        <h2>Seções</h2>
       </div>
       <div class="index-list">
         <a class="index-row" href={`${base}politica-externa/`}>
@@ -129,22 +132,6 @@ function coverOf(article: (typeof articles)[number]) {
           </div>
           <span class="index-cta">Abrir →</span>
         </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section navy cta-brasil">
-    <div class="shell cta-brasil-inner">
-      <div>
-        <p class="kicker light">Dossiê</p>
-        <h2>O Brasil no arquivo dos anos Nixon.</h2>
-      </div>
-      <div>
-        <p>Café, energia, comércio e estratégia hemisférica nos memorandos da Casa Branca e do Departamento de Estado.</p>
-        <div class="actions">
-          <a class="btn primary" href={`${base}brasil/`}>Dossiê Brasil</a>
-          <a class="btn ghost" href={`${base}artigos/brasil-potencia-regional/`}>Ler o ensaio</a>
-        </div>
       </div>
     </div>
   </section>
