@@ -2,6 +2,28 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
+const httpsUrl = z.url().refine((value) => new URL(value).protocol === 'https:', {
+  message: 'Use uma URL HTTPS.',
+});
+
+const imageSource = z.string().refine((value) => {
+  if (value.startsWith('/uploads/')) {
+    return !value.includes('\\') && !value.split('/').includes('..');
+  }
+
+  try {
+    const url = new URL(value);
+    return (
+      url.protocol === 'https:'
+      && ['commons.wikimedia.org', 'upload.wikimedia.org'].includes(url.hostname)
+    );
+  } catch {
+    return false;
+  }
+}, {
+  message: 'Use uma imagem da Wikimedia ou um arquivo de /uploads/.',
+});
+
 const artigos = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/artigos' }),
   schema: z.object({
@@ -19,12 +41,20 @@ const artigos = defineCollection({
       'Discursos',
       'Acervo',
     ]),
-    cover: z.string().optional(),
+    cover: imageSource.optional(),
     coverAlt: z.string().optional(),
     coverCredit: z.string().optional(),
-    sourceUrl: z.url().optional(),
+    sourceUrl: httpsUrl.optional(),
     homePlacement: z.enum(['lead', 'rail', 'none']).default('none'),
     draft: z.boolean().default(true),
+  }).superRefine((article, context) => {
+    if (article.cover && !article.coverAlt?.trim()) {
+      context.addIssue({
+        code: 'custom',
+        path: ['coverAlt'],
+        message: 'Informe o texto alternativo da imagem.',
+      });
+    }
   }),
 });
 
@@ -49,7 +79,7 @@ const documentos = defineCollection({
     category: z.enum(['Biografia', 'Presidência', 'Política externa', 'Nixon e o Brasil']),
     archive: z.string().optional(),
     reference: z.string().optional(),
-    originalUrl: z.url(),
+    originalUrl: httpsUrl,
     translationStatus: z.enum([
       'Original em inglês',
       'Tradução em preparação',

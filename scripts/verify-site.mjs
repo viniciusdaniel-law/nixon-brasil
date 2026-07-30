@@ -31,11 +31,27 @@ async function filesIn(directory) {
   return nested.flat();
 }
 
-const [header, config, cms, pageSource, articleNames] = await Promise.all([
+const [
+  header,
+  config,
+  cms,
+  pageSource,
+  globalCss,
+  homeCss,
+  layout,
+  workflow,
+  contentConfig,
+  articleNames,
+] = await Promise.all([
   readFile('src/components/Header.astro', 'utf8'),
   readFile('astro.config.mjs', 'utf8'),
   readFile('.pages.yml', 'utf8'),
   readFile('src/pages/index.astro', 'utf8'),
+  readFile('src/styles/global.css', 'utf8'),
+  readFile('src/styles/home.css', 'utf8'),
+  readFile('src/layouts/BaseLayout.astro', 'utf8'),
+  readFile('.github/workflows/pages.yml', 'utf8'),
+  readFile('src/content.config.ts', 'utf8'),
   readdir('src/content/artigos'),
 ]);
 
@@ -43,8 +59,35 @@ if (!config.includes("site: 'https://nixonbrazil.page'")) {
   throw new Error('O domínio canônico não está definido no Astro.');
 }
 
-if (!header.includes('<details class="nav-menu">') || header.includes('nav-open')) {
-  throw new Error('O menu deve funcionar sem JavaScript e sem bloquear a página.');
+const desktopNav = header.indexOf('class="main-nav desktop-nav"');
+const mobileMenu = header.indexOf('<details class="nav-menu">');
+if (desktopNav < 0 || mobileMenu < 0 || desktopNav > mobileMenu || !header.includes('class="main-nav mobile-nav"')) {
+  throw new Error('As navegações de desktop e celular devem ser independentes.');
+}
+
+if (!globalCss.includes('.desktop-nav { display: none; }') || !globalCss.includes('.nav-menu[open] .mobile-nav')) {
+  throw new Error('Os estados responsivos do menu não estão definidos.');
+}
+
+const mobileHero = /@media \(max-width: 700px\)[\s\S]*?\.hero-media\s*\{[\s\S]*?position:\s*relative;/.test(homeCss);
+if (!mobileHero || !homeCss.includes('.hero { min-height: 0; }')) {
+  throw new Error('A fotografia e o texto do hero devem ocupar zonas separadas no celular.');
+}
+
+if (workflow.includes('workflow_dispatch:') || !workflow.includes("if: github.event_name == 'push' && github.ref == 'refs/heads/main'")) {
+  throw new Error('A publicação deve ocorrer exclusivamente após push na main.');
+}
+
+if (
+  !layout.includes('"script-src \'self\'"')
+  || layout.includes("'unsafe-inline'")
+  || !layout.includes('<meta name="referrer" content="no-referrer"')
+) {
+  throw new Error('A política de conteúdo e referência não está endurecida.');
+}
+
+if (!contentConfig.includes('sourceUrl: httpsUrl') || !contentConfig.includes('originalUrl: httpsUrl')) {
+  throw new Error('Links editoriais externos devem aceitar apenas HTTPS.');
 }
 
 if (!cms.includes('name: homePlacement') || !pageSource.includes("homePlacement === 'lead'")) {
@@ -83,6 +126,33 @@ for (const file of htmlFiles) {
   }
   if (html.includes('viniciusdaniel-law.github.io/nixon-brasil')) {
     throw new Error(`Endereço antigo encontrado: ${file}`);
+  }
+  if (!html.includes('http-equiv="Content-Security-Policy"') || !html.includes('name="referrer" content="no-referrer"')) {
+    throw new Error(`Política de segurança ausente: ${file}`);
+  }
+  if (/(?:href|src)="(?:javascript:|data:text\/html|http:)/i.test(html)) {
+    throw new Error(`Protocolo inseguro encontrado: ${file}`);
+  }
+
+  for (const match of html.matchAll(/<a\b[^>]*target="_blank"[^>]*>/g)) {
+    if (!/\brel="[^"]*\bnoreferrer\b/.test(match[0])) {
+      throw new Error(`Link externo sem noreferrer: ${file}`);
+    }
+  }
+
+  for (const match of html.matchAll(/<img\b[^>]*>/g)) {
+    if (!/\balt="[^"]*"/.test(match[0])) {
+      throw new Error(`Imagem sem texto alternativo: ${file}`);
+    }
+  }
+
+  for (const match of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)) {
+    const [, attributes, body] = match;
+    const isJsonLd = /type="application\/ld\+json"/.test(attributes);
+    const hasSource = /\bsrc="[^"]+"/.test(attributes);
+    if (!isJsonLd && !hasSource && body.trim()) {
+      throw new Error(`JavaScript executável inline encontrado: ${file}`);
+    }
   }
 
   for (const match of html.matchAll(/href="([^"]+)"/g)) {

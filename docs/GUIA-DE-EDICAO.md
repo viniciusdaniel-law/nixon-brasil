@@ -162,7 +162,7 @@ Teste pelo menos:
 - 390 px;
 - 320 px.
 
-Ao alterar o header, confira os breakpoints de `1100px` e `700px`. O menu usa `<details>` e `<summary>` e deve continuar funcionando sem JavaScript.
+Ao alterar o header, confira os breakpoints de `1100px`, `700px` e `460px`. A navegação de desktop é independente; no celular, o menu usa `<details>` e `<summary>` e deve continuar funcionando sem JavaScript.
 
 ## Git e publicação
 
