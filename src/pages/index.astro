@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { imageAtWidth, imageSrcset } from '../lib/images';
+import { formatDate } from '../lib/dates';
 import '../styles/home.css';
 
 const base = import.meta.env.BASE_URL;
@@ -73,7 +74,7 @@ function coverOf(article: (typeof articles)[number]) {
             {coverOf(lead)
               ? <img src={imageAtWidth(coverOf(lead), 1280)} srcset={imageSrcset(coverOf(lead), [640, 960, 1280])} sizes="(max-width: 900px) calc(100vw - 24px), 65vw" alt={lead.data.coverAlt ?? ''} width="1200" height="675" loading="lazy" decoding="async" />
               : <div class="card-cover-fallback lead-fallback" aria-hidden="true">{lead.data.category}</div>}
-            <span class="card-meta">{lead.data.category} · {lead.data.publishedAt.toLocaleDateString('pt-BR')}</span>
+            <span class="card-meta">{lead.data.category} · {formatDate(lead.data.publishedAt)}</span>
             <h3>{lead.data.title}</h3>
             <p>{lead.data.subtitle ?? lead.data.description}</p>
           </a>

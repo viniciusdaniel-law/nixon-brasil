@@ -8,9 +8,9 @@
   --ink: #17202c;
   --muted: #5a6370;
   --line: #c9c5bb;
-  --sans: 'DM Sans', system-ui, sans-serif;
-  --display: 'Libre Caslon Display', Georgia, serif;
-  --text: 'Source Serif 4', Georgia, serif;
+  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --text: Charter, "Bitstream Charter", "Iowan Old Style", Georgia, serif;
   --shell: min(1220px, calc(100vw - 48px));
   --reading: min(760px, calc(100vw - 40px));
 }
