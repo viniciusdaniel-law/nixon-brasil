@@ -6,8 +6,9 @@ format: "Discurso"
 category: "Presidência"
 archive: "American Presidency Project / UCSB"
 reference: "Nixon, 8 de agosto de 1968"
-originalUrl: "https://www.presidency.ucsb.edu/documents/address-accepting-the-presidential-nomination-the-republican-national-convention-miami-beach"
+originalUrl: "https://www.presidency.ucsb.edu/documents/address-accepting-the-presidential-nomination-the-republican-national-convention-miami"
 translationStatus: "Tradução em preparação"
+draft: false
 description: "Discurso em que Nixon aceita a nomeação e articula ordem, paz e o chamado ao eleitorado que sustentaria a ideia de maioria silenciosa."
 ---
 

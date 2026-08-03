@@ -1,15 +1,9 @@
 ---
+import menu from '../data/settings/menu.json';
+
 const base = import.meta.env.BASE_URL;
 const path = Astro.url.pathname;
-const links = [
-  ['Biografia', 'biografia/'],
-  ['Presidência', 'presidencia/'],
-  ['Política externa', 'politica-externa/'],
-  ['Brasil', 'brasil/'],
-  ['Acervo', 'acervo/'],
-  ['Artigos', 'artigos/'],
-  ['Vídeos', 'videos/'],
-];
+const links = menu.links.map((link) => [link.label, link.url.replace(/^\//, '')]);
 
 const active = (href: string) => path === `${base}${href}` || path.startsWith(`${base}${href}`);
 ---

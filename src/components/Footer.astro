@@ -1,11 +1,20 @@
 ---
+import footer from '../data/settings/footer.json';
+import social from '../data/settings/social.json';
+
 const base = import.meta.env.BASE_URL;
+const socialLinks = [
+  ['X', social.x],
+  ['Instagram', social.instagram],
+  ['YouTube', social.youtube],
+].filter((entry) => entry[1]);
 ---
 <footer class="site-footer">
   <div class="shell footer-grid">
     <div>
       <strong>NIXON BRASIL</strong>
-      <p>Preservação e divulgação do legado de Richard Nixon em português.</p>
+      <p>{footer.description}</p>
+      <small>{footer.editor}</small>
     </div>
     <div>
       <span>Explorar</span>
@@ -13,6 +22,7 @@ const base = import.meta.env.BASE_URL;
       <a href={`${base}presidencia/`}>Presidência</a>
       <a href={`${base}politica-externa/`}>Política externa</a>
       <a href={`${base}brasil/`}>Nixon e o Brasil</a>
+      <a href={`${base}cronologia/`}>Cronologia</a>
     </div>
     <div>
       <span>Publicação</span>
@@ -20,16 +30,18 @@ const base = import.meta.env.BASE_URL;
       <a href={`${base}acervo/`}>Acervo</a>
       <a href={`${base}videos/`}>Vídeos</a>
       <a href={`${base}rss.xml`}>RSS</a>
+      <a href={`${base}sobre/`}>Sobre</a>
     </div>
     <div>
       <span>Fontes-base</span>
       <a href="https://www.nixonlibrary.gov/" target="_blank" rel="noreferrer">Nixon Library / NARA ↗</a>
       <a href="https://history.state.gov/historicaldocuments" target="_blank" rel="noreferrer">FRUS ↗</a>
       <a href="https://www.presidency.ucsb.edu/" target="_blank" rel="noreferrer">American Presidency Project ↗</a>
+      {socialLinks.map(([label, url]) => <a href={url} target="_blank" rel="noreferrer">{label} ↗</a>)}
     </div>
   </div>
   <div class="shell footer-bottom">
     <span>© 2026 Nixon Brasil · projeto independente</span>
-    <span>Sem vínculo com a Richard Nixon Foundation ou a NARA</span>
+    <span>{footer.independence}</span>
   </div>
 </footer>

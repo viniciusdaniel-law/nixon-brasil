@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { imageAtWidth } from '../lib/images';
+import seo from '../data/settings/seo.json';
 import '../styles/global.css';
 
 interface Props {
@@ -17,7 +18,7 @@ interface Props {
 const {
   title,
   description,
-  image = 'https://commons.wikimedia.org/wiki/Special:Redirect/file/NIXONcampaigns.jpg',
+  image = seo.defaultImage,
   type = 'website',
   publishedAt,
   updatedAt,
@@ -25,7 +26,7 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const fullTitle = title === 'Nixon Brasil' ? title : `${title} — Nixon Brasil`;
+const fullTitle = title === seo.siteName ? title : `${title} — ${seo.siteName}`;
 const base = import.meta.env.BASE_URL;
 const socialImage = imageAtWidth(image, 1600);
 const contentSecurityPolicy = [
@@ -50,25 +51,25 @@ const structuredData = type === 'article'
       description,
       image: socialImage,
       url: canonical.toString(),
-      inLanguage: 'pt-BR',
+      inLanguage: seo.language,
       datePublished: publishedAt?.toISOString(),
       dateModified: (updatedAt ?? publishedAt)?.toISOString(),
-      author: { '@type': 'Organization', name: author ?? 'Nixon Brasil' },
-      publisher: { '@type': 'Organization', name: 'Nixon Brasil' },
+      author: { '@type': 'Person', name: author ?? 'Vinicius Daniel' },
+      publisher: { '@type': 'Organization', name: seo.siteName },
     }
   : {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      name: 'Nixon Brasil',
+      name: seo.siteName,
       description,
       url: canonical.toString(),
-      inLanguage: 'pt-BR',
-      publisher: { '@type': 'Organization', name: 'Nixon Brasil' },
+      inLanguage: seo.language,
+      publisher: { '@type': 'Organization', name: seo.siteName },
     };
 const serializedStructuredData = JSON.stringify(structuredData).replace(/</g, '\\u003c');
 ---
 <!doctype html>
-<html lang="pt-BR">
+<html lang={seo.language}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -81,8 +82,8 @@ const serializedStructuredData = JSON.stringify(structuredData).replace(/</g, '\
     <link rel="alternate" type="application/rss+xml" title="Nixon Brasil" href={`${base}rss.xml`} />
     <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
     <meta property="og:type" content={type} />
-    <meta property="og:locale" content="pt_BR" />
-    <meta property="og:site_name" content="Nixon Brasil" />
+    <meta property="og:locale" content={seo.locale} />
+    <meta property="og:site_name" content={seo.siteName} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />

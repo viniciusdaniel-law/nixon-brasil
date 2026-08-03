@@ -18,6 +18,10 @@ const cover = rawCover
   : undefined;
 const words = article.body?.split(/\s+/).filter(Boolean).length ?? 0;
 const minutes = Math.max(1, Math.round(words / 220));
+const sources = [...new Set([
+  ...(article.data.sourceUrl ? [article.data.sourceUrl] : []),
+  ...article.data.sources,
+])];
 ---
 <BaseLayout
   title={article.data.title}
@@ -36,22 +40,27 @@ const minutes = Math.max(1, Math.round(words / 220));
       <div class="article-meta-row">
         <span>{article.data.author}</span>
         <span>{formatDate(article.data.publishedAt)}</span>
+        {article.data.updatedAt && <span>Revisto em {formatDate(article.data.updatedAt)}</span>}
         <span>{minutes} min de leitura</span>
       </div>
     </header>
     {cover && (
       <figure class="article-cover">
         <img src={imageAtWidth(cover, 1600)} srcset={imageSrcset(cover, [640, 960, 1280, 1600])} sizes="(max-width: 1220px) 100vw, 1220px" alt={article.data.coverAlt ?? ''} width="1240" height="700" loading="eager" decoding="async" />
-        {article.data.coverCredit && <figcaption>{article.data.coverCredit}</figcaption>}
+        {(article.data.coverCredit || article.data.coverRights) && (
+          <figcaption>{[article.data.coverCredit, article.data.coverRights].filter(Boolean).join(' · ')}</figcaption>
+        )}
       </figure>
     )}
     <div class="article-body">
       <Content />
-      {article.data.sourceUrl && (
+      {sources.length > 0 && (
         <aside class="article-sources">
-          <h2>Referência principal</h2>
+          <h2>Fontes e documentos</h2>
           <ul>
-            <li><a href={article.data.sourceUrl} target="_blank" rel="noreferrer">Consultar documento ou coleção ↗</a></li>
+            {sources.map((source) => (
+              <li><a href={source} target="_blank" rel="noreferrer">{new URL(source).hostname} ↗</a></li>
+            ))}
           </ul>
         </aside>
       )}

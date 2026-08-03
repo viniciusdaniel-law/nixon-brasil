@@ -3,6 +3,8 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { imageAtWidth, imageSrcset } from '../lib/images';
 import { formatDate } from '../lib/dates';
+import home from '../data/settings/home.json';
+import seo from '../data/settings/seo.json';
 import '../styles/home.css';
 
 const base = import.meta.env.BASE_URL;
@@ -16,7 +18,8 @@ const lead = articles.find((article) => article.data.homePlacement === 'lead') ?
 const rail = articles
   .filter((article) => article.id !== lead?.id && article.data.homePlacement === 'rail')
   .slice(0, 4);
-const heroImage = 'https://commons.wikimedia.org/wiki/Special:Redirect/file/NIXONcampaigns.jpg';
+const heroImage = home.heroImage;
+const internalUrl = (path: string) => `${base}${path.replace(/^\//, '')}`;
 
 function coverOf(article: (typeof articles)[number]) {
   const raw = article.data.cover ?? '';
@@ -26,7 +29,7 @@ function coverOf(article: (typeof articles)[number]) {
 ---
 <BaseLayout
   title="Nixon Brasil"
-  description="O legado de Richard Nixon em português: Presidência, diplomacia, realizações, documentos e relações com o Brasil."
+  description={seo.defaultDescription}
 >
   <section class="hero">
     <img
@@ -34,7 +37,7 @@ function coverOf(article: (typeof articles)[number]) {
       src={imageAtWidth(heroImage, 1600)}
       srcset={imageSrcset(heroImage, [640, 960, 1280, 1600])}
       sizes="100vw"
-      alt="Richard Nixon em campanha diante de uma multidão em 1968"
+      alt={home.heroAlt}
       width="1600"
       height="900"
       fetchpriority="high"
@@ -42,21 +45,18 @@ function coverOf(article: (typeof articles)[number]) {
     />
     <div class="hero-content">
       <div class="hero-copy">
-        <p class="kicker light">1913 — 1994 · 37º presidente dos Estados Unidos</p>
-        <h1>O legado de Richard Nixon, em português.</h1>
-        <p class="hero-lead">
-          Artigos e fontes primárias sobre Presidência, diplomacia, reformas e
-          relações com o Brasil.
-        </p>
+        <p class="kicker light">{home.eyebrow}</p>
+        <h1>{home.title}</h1>
+        <p class="hero-lead">{home.introduction}</p>
         <div class="actions">
-          <a class="btn primary" href={`${base}presidencia/`}>Presidência</a>
-          <a class="btn ghost" href={`${base}acervo/`}>Acervo</a>
+          <a class="btn primary" href={internalUrl(home.primaryUrl)}>{home.primaryLabel}</a>
+          <a class="btn ghost" href={internalUrl(home.secondaryUrl)}>{home.secondaryLabel}</a>
         </div>
       </div>
     </div>
     <div class="hero-note">
       <div class="shell">
-        <span>Fotografia: Ollie Atkins / NARA · domínio público</span>
+        <span>Fotografia: {home.heroCredit}</span>
       </div>
     </div>
   </section>
@@ -105,7 +105,7 @@ function coverOf(article: (typeof articles)[number]) {
           <span class="card-meta">Diplomacia</span>
           <div>
             <h3>Política externa</h3>
-            <p>China, détente e a passagem da confrontação à negociação.</p>
+            <p>China, détente, guerras e negociação entre potências.</p>
           </div>
           <span class="index-cta">Abrir →</span>
         </a>
@@ -113,7 +113,7 @@ function coverOf(article: (typeof articles)[number]) {
           <span class="card-meta">Governo</span>
           <div>
             <h3>Presidência</h3>
-            <p>Reformas, direitos, meio ambiente e instituições duradouras.</p>
+            <p>Governo interno, economia, direitos, meio ambiente e Watergate.</p>
           </div>
           <span class="index-cta">Abrir →</span>
         </a>
@@ -129,8 +129,33 @@ function coverOf(article: (typeof articles)[number]) {
           <span class="card-meta">Trajetória</span>
           <div>
             <h3>Biografia</h3>
-            <p>De Whittier à Casa Branca e ao retorno como estadista.</p>
+            <p>De Whittier à Casa Branca, à renúncia e à pós-Presidência.</p>
           </div>
+          <span class="index-cta">Abrir →</span>
+        </a>
+        <a class="index-row" href={`${base}cronologia/`}>
+          <span class="card-meta">Linha do tempo</span>
+          <div><h3>Cronologia</h3><p>Eventos documentados da formação à pós-Presidência.</p></div>
+          <span class="index-cta">Abrir →</span>
+        </a>
+        <a class="index-row" href={`${base}discursos/`}>
+          <span class="card-meta">Retórica</span>
+          <div><h3>Discursos</h3><p>Texto, contexto, referência original e tradução.</p></div>
+          <span class="index-cta">Abrir →</span>
+        </a>
+        <a class="index-row" href={`${base}pessoas/`}>
+          <span class="card-meta">Índice biográfico</span>
+          <div><h3>Pessoas</h3><p>Dirigentes, diplomatas e assessores ligados aos documentos.</p></div>
+          <span class="index-cta">Abrir →</span>
+        </a>
+        <a class="index-row" href={`${base}temas/`}>
+          <span class="card-meta">Dossiês</span>
+          <div><h3>Temas</h3><p>Conjuntos documentais para pesquisa orientada.</p></div>
+          <span class="index-cta">Abrir →</span>
+        </a>
+        <a class="index-row" href={`${base}galerias/`}>
+          <span class="card-meta">Arquivo visual</span>
+          <div><h3>Galerias</h3><p>Fotografias com identificação, crédito e fonte.</p></div>
           <span class="index-cta">Abrir →</span>
         </a>
       </div>

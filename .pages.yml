@@ -8,148 +8,285 @@ content:
     type: collection
     path: src/content/artigos
     view:
-      fields: [title, category, publishedAt, draft]
+      fields: [title, category, publishedAt, author, draft]
       primary: title
       sort: [publishedAt, title]
       default:
         sort: publishedAt
         order: desc
     fields:
-      - name: title
-        label: Título
-        type: string
-        required: true
-      - name: subtitle
-        label: Subtítulo
-        type: string
-      - name: description
-        label: Resumo para busca e redes
-        type: text
-        required: true
-      - name: publishedAt
-        label: Data de publicação
-        type: date
-        required: true
-      - name: updatedAt
-        label: Última atualização
-        type: date
-      - name: author
-        label: Autor
-        type: string
-        default: Nixon Brasil
+      - { name: title, label: Título, type: string, required: true }
+      - { name: subtitle, label: Subtítulo, type: string }
+      - { name: description, label: Resumo para busca e redes, type: text, required: true }
+      - { name: publishedAt, label: Data de publicação, type: date, required: true }
+      - { name: updatedAt, label: Última atualização, type: date }
+      - { name: author, label: Autor, type: string, default: Vinicius Daniel }
       - name: category
         label: Categoria
         type: select
         required: true
         options:
-          values:
-            - Biografia
-            - Presidência
-            - Política externa
-            - Nixon e o Brasil
-            - Discursos
-            - Acervo
-      - name: cover
-        label: Imagem de capa
-        type: image
-      - name: coverAlt
-        label: Texto alternativo da capa
+          values: [Biografia, Presidência, Política externa, Nixon e o Brasil, Discursos, Acervo]
+      - { name: cover, label: Imagem de capa, type: image }
+      - { name: coverAlt, label: Texto alternativo da capa, type: string }
+      - { name: coverCredit, label: Crédito da imagem, type: string }
+      - { name: coverRights, label: Direitos da imagem, type: string }
+      - { name: sourceUrl, label: Fonte primária principal, type: string, pattern: "^https://" }
+      - name: sources
+        label: Fontes adicionais
         type: string
-      - name: coverCredit
-        label: Crédito da imagem
-        type: string
-      - name: sourceUrl
-        label: Fonte primária principal
-        type: string
+        list: true
+        pattern: "^https://"
       - name: homePlacement
         label: Posição na página inicial
         type: select
         default: none
         options:
-          values:
-            - lead
-            - rail
-            - none
-      - name: draft
-        label: Rascunho
-        type: boolean
-        default: true
-      - name: body
-        label: Texto
-        type: rich-text
-        required: true
+          values: [lead, rail, none]
+      - { name: draft, label: Rascunho, type: boolean, default: true }
+      - { name: body, label: Texto, type: rich-text, required: true }
 
   - name: documentos
     label: Documentos do acervo
     type: collection
     path: src/content/documentos
     view:
-      fields: [title, date, format, category]
+      fields: [title, date, format, category, translationStatus, draft]
       primary: title
       sort: [date, title]
       default:
         sort: date
         order: desc
     fields:
-      - name: title
-        label: Título editorial
-        type: string
-        required: true
-      - name: originalTitle
-        label: Título original
-        type: string
-      - name: date
-        label: Data do documento
-        type: date
-        required: true
+      - { name: title, label: Título editorial, type: string, required: true }
+      - { name: originalTitle, label: Título original, type: string }
+      - { name: date, label: Data do documento, type: date, required: true }
       - name: format
         label: Formato
         type: select
+        required: true
         options:
-          values:
-            - Memorando
-            - Discurso
-            - Comunicado
-            - Tratado
-            - Coleção
-            - Página institucional
-            - Fotografia
-            - Gravação
-            - Vídeo
-            - Lei
+          values: [Memorando, Discurso, Comunicado, Tratado, Coleção, Página institucional, Fotografia, Gravação, Vídeo, Lei]
       - name: category
         label: Tema
         type: select
-        options:
-          values:
-            - Biografia
-            - Presidência
-            - Política externa
-            - Nixon e o Brasil
-      - name: archive
-        label: Arquivo de origem
-        type: string
-      - name: reference
-        label: Referência oficial
-        type: string
-      - name: originalUrl
-        label: Link para o original
-        type: string
         required: true
+        options:
+          values: [Biografia, Presidência, Política externa, Nixon e o Brasil]
+      - { name: archive, label: Arquivo de origem, type: string }
+      - { name: reference, label: Referência oficial, type: string }
+      - { name: originalUrl, label: Link para o original, type: string, required: true, pattern: "^https://" }
       - name: translationStatus
         label: Situação da tradução
         type: select
+        default: Original em inglês
         options:
-          values:
-            - Original em inglês
-            - Tradução em preparação
-            - Tradução editorial publicada
-      - name: description
-        label: Nota documental
-        type: text
-      - name: body
-        label: Comentário ou tradução
-        type: rich-text
+          values: [Original em inglês, Tradução em preparação, Tradução editorial publicada]
+      - { name: description, label: Nota documental, type: text }
+      - { name: sources, label: Fontes adicionais, type: string, list: true, pattern: "^https://" }
+      - { name: people, label: Pessoas relacionadas, type: string, list: true }
+      - { name: themes, label: Temas relacionados, type: string, list: true }
+      - { name: draft, label: Rascunho, type: boolean, default: true }
+      - { name: body, label: Comentário ou tradução, type: rich-text }
+
+  - name: paginas
+    label: Páginas institucionais
+    type: group
+    items:
+      - name: biografia
+        label: Biografia
+        type: file
+        path: src/content/paginas/biografia.md
+        fields:
+          - { name: title, label: Título, type: string, required: true }
+          - { name: eyebrow, label: Sobretítulo, type: string, required: true }
+          - { name: description, label: Descrição para busca, type: text, required: true }
+          - { name: lede, label: Apresentação, type: text, required: true }
+          - { name: updatedAt, label: Última revisão, type: date, required: true }
+          - { name: draft, label: Rascunho, type: boolean, default: false }
+          - { name: body, label: Texto, type: rich-text, required: true }
+      - name: sobre
+        label: Sobre o projeto
+        type: file
+        path: src/content/paginas/sobre.md
+        fields:
+          - { name: title, label: Título, type: string, required: true }
+          - { name: eyebrow, label: Sobretítulo, type: string, required: true }
+          - { name: description, label: Descrição para busca, type: text, required: true }
+          - { name: lede, label: Apresentação, type: text, required: true }
+          - { name: updatedAt, label: Última revisão, type: date, required: true }
+          - { name: draft, label: Rascunho, type: boolean, default: false }
+          - { name: body, label: Texto, type: rich-text, required: true }
+      - name: brasil
+        label: Nixon e o Brasil
+        type: file
+        path: src/content/paginas/brasil.md
+        fields:
+          - { name: title, label: Título, type: string, required: true }
+          - { name: eyebrow, label: Sobretítulo, type: string, required: true }
+          - { name: description, label: Descrição para busca, type: text, required: true }
+          - { name: lede, label: Apresentação, type: text, required: true }
+          - { name: updatedAt, label: Última revisão, type: date, required: true }
+          - { name: draft, label: Rascunho, type: boolean, default: false }
+          - { name: body, label: Texto, type: rich-text, required: true }
+
+  - name: cronologia
+    label: Cronologia
+    type: collection
+    path: src/content/cronologia
+    view:
+      fields: [date, title, category, draft]
+      primary: title
+      sort: [date, title]
+    fields:
+      - { name: date, label: Data, type: date, required: true }
+      - { name: title, label: Evento, type: string, required: true }
+      - { name: summary, label: Resumo, type: text, required: true }
+      - name: category
+        label: Período
+        type: select
+        options:
+          values: [Biografia, Campanhas, Presidência, Política externa, Pós-Presidência]
+      - { name: sourceUrl, label: Fonte, type: string, required: true, pattern: "^https://" }
+      - { name: draft, label: Rascunho, type: boolean, default: true }
+
+  - name: discursos
+    label: Discursos
+    type: collection
+    path: src/content/discursos
+    view:
+      fields: [title, date, occasion, translationStatus, draft]
+      primary: title
+      sort: [date, title]
+    fields:
+      - { name: title, label: Título, type: string, required: true }
+      - { name: date, label: Data, type: date, required: true }
+      - { name: occasion, label: Ocasião, type: string, required: true }
+      - { name: description, label: Resumo, type: text, required: true }
+      - { name: originalUrl, label: Texto original, type: string, required: true, pattern: "^https://" }
+      - name: translationStatus
+        label: Tradução
+        type: select
+        options:
+          values: [Original em inglês, Tradução em preparação, Tradução editorial publicada]
+      - { name: draft, label: Rascunho, type: boolean, default: true }
+      - { name: body, label: Contexto ou tradução, type: rich-text, required: true }
+
+  - name: pessoas
+    label: Pessoas
+    type: collection
+    path: src/content/pessoas
+    view:
+      fields: [name, role, lifespan, draft]
+      primary: name
+      sort: [name]
+    fields:
+      - { name: name, label: Nome, type: string, required: true }
+      - { name: role, label: Função histórica, type: string, required: true }
+      - { name: lifespan, label: Período de vida, type: string }
+      - { name: description, label: Resumo, type: text, required: true }
+      - { name: cover, label: Imagem, type: image }
+      - { name: coverAlt, label: Texto alternativo, type: string }
+      - { name: sourceUrl, label: Fonte, type: string, required: true, pattern: "^https://" }
+      - { name: draft, label: Rascunho, type: boolean, default: true }
+      - { name: body, label: Perfil, type: rich-text, required: true }
+
+  - name: temas
+    label: Temas
+    type: collection
+    path: src/content/temas
+    view:
+      fields: [title, description, draft]
+      primary: title
+      sort: [title]
+    fields:
+      - { name: title, label: Tema, type: string, required: true }
+      - { name: description, label: Resumo, type: text, required: true }
+      - { name: sourceUrl, label: Fonte-base, type: string, required: true, pattern: "^https://" }
+      - { name: draft, label: Rascunho, type: boolean, default: true }
+      - { name: body, label: Apresentação, type: rich-text, required: true }
+
+  - name: galerias
+    label: Galerias
+    type: collection
+    path: src/content/galerias
+    view:
+      fields: [title, date, draft]
+      primary: title
+      sort: [date, title]
+    fields:
+      - { name: title, label: Título, type: string, required: true }
+      - { name: date, label: Data principal, type: date, required: true }
+      - { name: description, label: Resumo, type: text, required: true }
+      - { name: cover, label: Capa, type: image, required: true }
+      - { name: coverAlt, label: Texto alternativo, type: string, required: true }
+      - { name: coverCredit, label: Crédito e direitos, type: string, required: true }
+      - { name: sourceUrl, label: Fonte de arquivo, type: string, required: true, pattern: "^https://" }
+      - { name: draft, label: Rascunho, type: boolean, default: true }
+      - { name: body, label: Ensaio visual, type: rich-text, required: true }
+
+  - name: configuracoes
+    label: Configurações
+    type: group
+    items:
+      - name: home
+        label: Página inicial
+        type: file
+        path: src/data/settings/home.json
+        format: json
+        fields:
+          - { name: eyebrow, label: Sobretítulo, type: string, required: true }
+          - { name: title, label: Título principal, type: string, required: true }
+          - { name: introduction, label: Introdução, type: text, required: true }
+          - { name: heroImage, label: Imagem principal, type: image, required: true }
+          - { name: heroAlt, label: Texto alternativo, type: string, required: true }
+          - { name: heroCredit, label: Crédito e direitos, type: string, required: true }
+          - { name: primaryLabel, label: Botão principal, type: string, required: true }
+          - { name: primaryUrl, label: URL do botão principal, type: string, required: true, pattern: "^/" }
+          - { name: secondaryLabel, label: Botão secundário, type: string, required: true }
+          - { name: secondaryUrl, label: URL do botão secundário, type: string, required: true, pattern: "^/" }
+      - name: menu
+        label: Menu
+        type: file
+        path: src/data/settings/menu.json
+        format: json
+        fields:
+          - name: links
+            label: Links
+            type: object
+            list: true
+            fields:
+              - { name: label, label: Rótulo, type: string, required: true }
+              - { name: url, label: URL interna, type: string, required: true, pattern: "^/" }
+      - name: footer
+        label: Rodapé
+        type: file
+        path: src/data/settings/footer.json
+        format: json
+        fields:
+          - { name: description, label: Descrição, type: text, required: true }
+          - { name: editor, label: Crédito editorial, type: string, required: true }
+          - { name: independence, label: Nota de independência, type: text, required: true }
+      - name: social
+        label: Links sociais
+        type: file
+        path: src/data/settings/social.json
+        format: json
+        fields:
+          - { name: x, label: X, type: string, pattern: "^(|https://)" }
+          - { name: instagram, label: Instagram, type: string, pattern: "^(|https://)" }
+          - { name: youtube, label: YouTube, type: string, pattern: "^(|https://)" }
+      - name: seo
+        label: SEO geral
+        type: file
+        path: src/data/settings/seo.json
+        format: json
+        fields:
+          - { name: siteName, label: Nome do site, type: string, required: true }
+          - { name: defaultDescription, label: Descrição padrão, type: text, required: true }
+          - { name: defaultImage, label: Imagem padrão, type: image, required: true }
+          - { name: locale, label: Locale Open Graph, type: string, required: true }
+          - { name: language, label: Idioma HTML, type: string, required: true }
 
 settings:
   commit:

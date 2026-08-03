@@ -9,7 +9,18 @@ const requiredRoutes = [
   'dist/politica-externa/index.html',
   'dist/brasil/index.html',
   'dist/acervo/index.html',
+  'dist/acervo/nixon-brasil-1972/index.html',
   'dist/artigos/index.html',
+  'dist/artigos/abertura-china/index.html',
+  'dist/cronologia/index.html',
+  'dist/discursos/index.html',
+  'dist/discursos/maioria-silenciosa-1969/index.html',
+  'dist/pessoas/index.html',
+  'dist/pessoas/richard-nixon/index.html',
+  'dist/temas/index.html',
+  'dist/temas/brasil-estados-unidos/index.html',
+  'dist/galerias/index.html',
+  'dist/galerias/visita-china-1972/index.html',
   'dist/videos/index.html',
   'dist/sobre/index.html',
   'dist/404.html',
@@ -40,8 +51,12 @@ const [
   homeCss,
   layout,
   workflow,
+  dependabot,
   contentConfig,
   articleNames,
+  homeSettings,
+  menuSettings,
+  seoSettings,
 ] = await Promise.all([
   readFile('src/components/Header.astro', 'utf8'),
   readFile('astro.config.mjs', 'utf8'),
@@ -51,8 +66,12 @@ const [
   readFile('src/styles/home.css', 'utf8'),
   readFile('src/layouts/BaseLayout.astro', 'utf8'),
   readFile('.github/workflows/pages.yml', 'utf8'),
+  readFile('.github/dependabot.yml', 'utf8'),
   readFile('src/content.config.ts', 'utf8'),
   readdir('src/content/artigos'),
+  readFile('src/data/settings/home.json', 'utf8').then(JSON.parse),
+  readFile('src/data/settings/menu.json', 'utf8').then(JSON.parse),
+  readFile('src/data/settings/seo.json', 'utf8').then(JSON.parse),
 ]);
 
 if (!config.includes("site: 'https://nixonbrazil.page'")) {
@@ -78,6 +97,17 @@ if (workflow.includes('workflow_dispatch:') || !workflow.includes("if: github.ev
   throw new Error('A publicação deve ocorrer exclusivamente após push na main.');
 }
 
+if (!workflow.includes('npm ci --ignore-scripts --no-audit --no-fund')) {
+  throw new Error('A instalação no CI deve bloquear scripts de pacotes de terceiros.');
+}
+
+if (
+  !dependabot.includes('dependency-name: typescript')
+  || !dependabot.includes('version-update:semver-major')
+) {
+  throw new Error('O Dependabot não deve propor TypeScript 7 enquanto o Astro não for compatível.');
+}
+
 if (
   !layout.includes('"script-src \'self\'"')
   || layout.includes("'unsafe-inline'")
@@ -94,6 +124,30 @@ if (!cms.includes('name: homePlacement') || !pageSource.includes("homePlacement 
   throw new Error('A posição dos artigos na página inicial não está ligada ao CMS.');
 }
 
+for (const section of ['paginas', 'cronologia', 'discursos', 'pessoas', 'temas', 'galerias', 'configuracoes']) {
+  if (!cms.includes(`name: ${section}`)) {
+    throw new Error(`Seção ausente no Pages CMS: ${section}.`);
+  }
+}
+
+if (!layout.includes('type="application/rss+xml"') || !layout.includes('rss.xml')) {
+  throw new Error('O RSS precisa ser anunciado no cabeçalho das páginas.');
+}
+
+if (!seoSettings.siteName || seoSettings.language !== 'pt-BR' || seoSettings.locale !== 'pt_BR') {
+  throw new Error('As configurações globais de SEO estão incompletas.');
+}
+
+for (const [label, url] of [
+  ['botão principal', homeSettings.primaryUrl],
+  ['botão secundário', homeSettings.secondaryUrl],
+  ...menuSettings.links.map((link) => [`menu: ${link.label}`, link.url]),
+]) {
+  if (typeof url !== 'string' || !/^\/(?!\/)/.test(url)) {
+    throw new Error(`URL interna inválida em ${label}.`);
+  }
+}
+
 const articleSources = await Promise.all(
   articleNames
     .filter((name) => extname(name) === '.md')
@@ -108,8 +162,8 @@ if (leadCount !== 1) {
 const generatedFiles = await filesIn('dist');
 const htmlFiles = generatedFiles.filter((file) => extname(file) === '.html');
 
-if (htmlFiles.length !== 15) {
-  throw new Error(`O build deveria gerar 15 páginas HTML; gerou ${htmlFiles.length}.`);
+if (htmlFiles.length < 30) {
+  throw new Error(`A expansão editorial deveria gerar ao menos 30 páginas HTML; gerou ${htmlFiles.length}.`);
 }
 
 for (const file of htmlFiles) {

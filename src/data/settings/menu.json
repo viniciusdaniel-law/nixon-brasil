@@ -1,0 +1,10 @@
+{
+  "links": [
+    { "label": "Biografia", "url": "/biografia/" },
+    { "label": "Presidência", "url": "/presidencia/" },
+    { "label": "Política externa", "url": "/politica-externa/" },
+    { "label": "Brasil", "url": "/brasil/" },
+    { "label": "Acervo", "url": "/acervo/" },
+    { "label": "Artigos", "url": "/artigos/" }
+  ]
+}
