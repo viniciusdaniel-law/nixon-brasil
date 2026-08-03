@@ -17,7 +17,7 @@ Markdown e componentes Astro
 ```
 
 - Astro transforma `src/` em HTML, CSS, RSS e sitemap.
-- O Pages CMS edita artigos e documentos no GitHub.
+- O Pages CMS edita conteúdo e configurações editoriais no GitHub.
 - GitHub Actions testa pull requests e publica a `main`.
 - Name.com mantém o DNS; GitHub Pages hospeda o site.
 
@@ -56,6 +56,13 @@ scripts/                      verificações locais
 src/components/               header e footer
 src/content/artigos/          artigos em Markdown
 src/content/documentos/       fichas do acervo
+src/content/paginas/          páginas institucionais
+src/content/cronologia/       linha do tempo
+src/content/discursos/        discursos e contexto
+src/content/pessoas/          perfis biográficos
+src/content/temas/            dossiês
+src/content/galerias/         ensaios visuais
+src/data/settings/            home, menu, rodapé, redes e SEO
 src/content.config.ts         campos aceitos pelo Astro
 src/layouts/                  metadados e estrutura comum
 src/pages/                    rotas
@@ -87,7 +94,7 @@ const title = 'Exemplo';
 
 O código entre `---` roda durante o build. O visitante recebe apenas o resultado.
 
-Para trocar texto da home, edite `src/pages/index.astro`. Para alterar o menu, edite a lista `links` em `src/components/Header.astro`. Para mudar cores ou tipografia, comece pelas variáveis no topo de `src/styles/global.css`.
+Para trocar texto da home ou menu, use **Configurações** no Pages CMS; os dados ficam em `src/data/settings/`. Para mudar cores ou tipografia, comece pelas variáveis no topo de `src/styles/global.css`.
 
 Ao criar uma rota:
 
@@ -107,12 +114,15 @@ title: "Título"
 subtitle: "Subtítulo"
 description: "Resumo para busca e redes"
 publishedAt: 2026-07-29
-author: "Nixon Brasil"
+author: "Vinicius Daniel"
 category: "Política externa"
 cover: "/uploads/imagem.jpg"
 coverAlt: "Descrição objetiva da imagem"
 coverCredit: "Autor / instituição · licença"
+coverRights: "Situação dos direitos"
 sourceUrl: "https://fonte-principal"
+sources:
+  - "https://fonte-adicional"
 homePlacement: "none"
 draft: true
 ---
@@ -198,10 +208,12 @@ O script próprio confere:
 - rotas obrigatórias;
 - domínio canônico;
 - navegação sem script;
-- integração entre CMS e home;
+- integração entre CMS, configurações e home;
 - uma única matéria principal;
 - títulos, descrições e URLs canônicas;
-- links internos.
+- links internos e rotas das novas coleções;
+- instalação sem scripts de terceiros no CI;
+- bloqueio temporário de versões incompatíveis do TypeScript.
 
 O workflow também executa `npm audit` e só concede permissão de publicação ao job de deploy.
 

@@ -1,10 +1,10 @@
 # Nixon Brasil
 
-Produto editorial brasileiro dedicado a preservar e apresentar, em português, a vida pública e o legado de Richard Nixon.
+Publicação histórica brasileira sobre Richard Nixon, sua Presidência e as relações dos Estados Unidos com o Brasil.
 
 **Site:** [nixonbrazil.page](https://nixonbrazil.page)
 
-O projeto adapta ao público brasileiro um modelo de divulgação histórica centrado em legado, documentos, educação e mídia. O acervo é formado por artigos em Markdown e fichas de documentos históricos; as páginas são compiladas com Astro e publicadas no GitHub Pages.
+O acervo reúne artigos, documentos, cronologia, discursos, perfis, temas e imagens. O conteúdo fica em Markdown ou JSON, é compilado com Astro e publicado no GitHub Pages.
 
 Até existir autorização ou colaboração formal, o Nixon Brasil permanece uma iniciativa independente e não usa nome, selo ou identidade visual da Richard Nixon Foundation.
 
@@ -12,7 +12,14 @@ Até existir autorização ou colaboração formal, o Nixon Brasil permanece uma
 
 ```text
 src/content/artigos/     artigos publicados e rascunhos
-src/content/documentos/  fichas do acervo
+src/content/documentos/  documentos e notas de acervo
+src/content/paginas/     biografia, Brasil e sobre
+src/content/cronologia/  eventos da linha do tempo
+src/content/discursos/   discursos e contexto
+src/content/pessoas/     perfis biográficos
+src/content/temas/       dossiês temáticos
+src/content/galerias/    ensaios visuais
+src/data/settings/       home, menu, rodapé, redes e SEO
 src/pages/               páginas e rotas
 src/components/          cabeçalho e rodapé
 src/styles/              estilos gerais e da página inicial
@@ -22,7 +29,7 @@ public/uploads/           imagens enviadas pelo CMS
 
 ## Edição
 
-O uso cotidiano não exige alterar código. O [Pages CMS](https://app.pagescms.org/) edita artigos e documentos na branch `editorial`; a publicação só ocorre depois de uma pull request aprovada para `main`. Consulte:
+O uso cotidiano não exige alterar código. O [Pages CMS](https://app.pagescms.org/) edita o conteúdo e as configurações editoriais na branch `editorial`; a publicação só ocorre depois de uma pull request para `main`. Consulte:
 
 - [`docs/CMS.md`](docs/CMS.md) — publicar e organizar conteúdo;
 - [`docs/GUIA-DE-EDICAO.md`](docs/GUIA-DE-EDICAO.md) — revisão, teste e manutenção;
@@ -46,6 +53,10 @@ npm run build
 ```
 
 O comando verifica os tipos, compila todas as rotas e testa navegação, metadados e configuração editorial.
+
+## Responsabilidade editorial
+
+Pesquisa, seleção e edição: Vinicius Daniel. Fontes oficiais são tratadas como documentos produzidos por instituições, não como interpretações neutras. O projeto distingue registro primário, análise historiográfica e inferência editorial.
 
 ## Publicação
 
