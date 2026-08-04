@@ -42,6 +42,7 @@ const [
   workflow,
   contentConfig,
   articleNames,
+  documentNames,
   siteSettings,
 ] = await Promise.all([
   readFile('src/components/Header.astro', 'utf8'),
@@ -54,6 +55,7 @@ const [
   readFile('.github/workflows/pages.yml', 'utf8'),
   readFile('src/content.config.ts', 'utf8'),
   readdir('src/content/artigos'),
+  readdir('src/content/documentos'),
   readFile('src/data/site.json', 'utf8'),
 ]);
 
@@ -96,8 +98,20 @@ if (!contentConfig.includes('sourceUrl: httpsUrl') || !contentConfig.includes('o
   throw new Error('Links editoriais externos devem aceitar apenas HTTPS.');
 }
 
+if (!contentConfig.includes('const paginas = defineCollection') || !contentConfig.includes('draft: z.boolean().default(true)')) {
+  throw new Error('Páginas institucionais e rascunhos do acervo não estão protegidos pelo schema.');
+}
+
 if (!cms.includes('name: homePlacement') || !pageSource.includes("homePlacement === 'lead'")) {
   throw new Error('A posição dos artigos na página inicial não está ligada ao CMS.');
+}
+
+if (
+  !cms.includes('label: Páginas institucionais')
+  || !cms.includes('label: Configurações do site')
+  || /label: (Cronologia|Pessoas|Temas|Galerias)/.test(cms)
+) {
+  throw new Error('O CMS deve administrar o conteúdo existente sem publicar coleções vazias.');
 }
 
 const parsedSiteSettings = JSON.parse(siteSettings);
@@ -110,6 +124,11 @@ const articleSources = await Promise.all(
     .filter((name) => extname(name) === '.md')
     .map((name) => readFile(join('src/content/artigos', name), 'utf8')),
 );
+const documentSources = await Promise.all(
+  documentNames
+    .filter((name) => extname(name) === '.md')
+    .map((name) => readFile(join('src/content/documentos', name), 'utf8')),
+);
 const leadCount = articleSources.filter((source) => source.includes('homePlacement: "lead"')).length;
 if (leadCount !== 1) {
   throw new Error(`A página inicial precisa de uma matéria principal; foram encontradas ${leadCount}.`);
@@ -121,11 +140,17 @@ for (const [index, name] of articleNames.filter((entry) => extname(entry) === '.
   }
 }
 
+for (const [index, name] of documentNames.filter((entry) => extname(entry) === '.md').entries()) {
+  if (documentSources[index].includes('draft: false')) {
+    await access(join('dist/acervo', name.replace(/\.md$/, ''), 'index.html'), constants.R_OK);
+  }
+}
+
 const generatedFiles = await filesIn('dist');
 const htmlFiles = generatedFiles.filter((file) => extname(file) === '.html');
 
-if (htmlFiles.length !== 15) {
-  throw new Error(`O build deveria gerar 15 páginas HTML; gerou ${htmlFiles.length}.`);
+if (htmlFiles.length < 20) {
+  throw new Error(`O build deveria gerar ao menos 20 páginas HTML; gerou ${htmlFiles.length}.`);
 }
 
 for (const file of htmlFiles) {
@@ -197,4 +222,4 @@ for (const route of ['videos', 'cronologia', 'discursos', 'pessoas', 'temas', 'g
   }
 }
 
-console.log(`Site verificado: ${htmlFiles.length} páginas, feed, metadados e navegação.`);
+console.log(`Site verificado: ${htmlFiles.length} páginas, feed, acervo, CMS, metadados e navegação.`);
